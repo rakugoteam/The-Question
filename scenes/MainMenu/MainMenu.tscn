@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://2cvjfseljf2o" path="res://scenes/MainMenu/MainMenu.gd" id="1"]
 [ext_resource type="Theme" uid="uid://bubl284qwoqf8" path="res://the_question_theme.tres" id="1_7j8ul"]
 [ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://scenes/Credits/Credits.tscn" id="3_5dhvp"]
-[ext_resource type="Texture2D" uid="uid://bo6v222eqei2e" path="res://the_question-og/game/gui/main_menu.png" id="3_r8q81"]
+[ext_resource type="Texture2D" uid="uid://bo6v222eqei2e" path="res://the_question-og/gui/main_menu.png" id="3_r8q81"]
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/rakugo_game_template/MusicPlayers/BackgroundMusicPlayer.tscn" id="4_w8sbm"]
 [ext_resource type="PackedScene" uid="uid://choevp6ilq78t" path="res://scenes/LoadSaveMenu/loadSaveMenu.tscn" id="5_mfpq2"]
 [ext_resource type="PackedScene" uid="uid://djnvp4x64ukay" path="res://scenes/OptionsMenu/OptionsContainer.tscn" id="6_ky335"]
