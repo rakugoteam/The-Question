@@ -1,10 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6k5nnpbypshi"]
+[gd_scene load_steps=9 format=3 uid="uid://c6k5nnpbypshi"]
 
-[ext_resource type="Script" path="res://scenes/MainMenu/MainMenu.gd" id="1"]
+[ext_resource type="Script" uid="uid://2cvjfseljf2o" path="res://scenes/MainMenu/MainMenu.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://scenes/Credits/Credits.tscn" id="3_5dhvp"]
+[ext_resource type="Texture2D" uid="uid://bo6v222eqei2e" path="res://the_question-og/game/gui/main_menu.png" id="3_r8q81"]
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/rakugo_game_template/MusicPlayers/BackgroundMusicPlayer.tscn" id="4_w8sbm"]
 [ext_resource type="PackedScene" uid="uid://choevp6ilq78t" path="res://scenes/LoadSaveMenu/loadSaveMenu.tscn" id="5_mfpq2"]
 [ext_resource type="PackedScene" uid="uid://djnvp4x64ukay" path="res://scenes/OptionsMenu/OptionsContainer.tscn" id="6_ky335"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7j8ul"]
+font_size = 40
+font_color = Color(0.874356, 0.11463, 0.407597, 1)
+outline_size = 8
+outline_color = Color(0.0338533, 0.0338533, 0.0338533, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0qq82"]
+font_size = 20
+font_color = Color(0.874356, 0.11463, 0.407597, 1)
+outline_size = 8
+outline_color = Color(0.0338533, 0.0338533, 0.0338533, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -24,6 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("3_r8q81")
 expand_mode = 1
 stretch_mode = 5
 
@@ -66,14 +80,16 @@ layout_mode = 2
 [node name="Game_Title" type="Label" parent="VBoxContainer/HeaderMargin/TitlesContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "Game Title"
+text = "The Question"
+label_settings = SubResource("LabelSettings_7j8ul")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Game_SubTitle" type="Label" parent="VBoxContainer/HeaderMargin/TitlesContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Game Subtitle"
+text = "Rakugo Port"
+label_settings = SubResource("LabelSettings_0qq82")
 horizontal_alignment = 1
 vertical_alignment = 1
 
