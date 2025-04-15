@@ -1,0 +1,19 @@
+"start"
+show Parent ChildA
+"step"
+scale 0.2 -0.4
+"step"
+scale 2
+"step"
+scale x = -2
+"step"
+scale x += 0.5
+"step"
+scale y -= 2.5
+"step"
+scale x /= 2
+"step"
+scale x *= 3
+"step"
+hide Parent
+"end"

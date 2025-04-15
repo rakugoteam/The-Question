@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RenPyMarkupParser" load_steps=6 format=3 uid="uid://bxa5smnbrf6bu"]
+
+[ext_resource type="Script" uid="uid://dtfljbtsogttu" path="res://addons/advanced-text/parsers/RenPyMarkupParser.gd" id="1_8uywj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c1gva"]
+font_size = 22
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t0ll0"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ggp5k"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uychv"]
+font_color = Color(0, 0, 0, 1)
+
+[resource]
+script = ExtResource("1_8uywj")
+headers = Array[LabelSettings]([SubResource("LabelSettings_c1gva"), SubResource("LabelSettings_t0ll0"), SubResource("LabelSettings_ggp5k"), SubResource("LabelSettings_uychv")])

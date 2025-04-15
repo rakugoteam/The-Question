@@ -1,0 +1,39 @@
+"start"
+play AnimationPlayer test
+"step"
+pause AnimationPlayer
+"step"
+play AnimationPlayer test 2
+"step"
+pause AnimationPlayer
+"step"
+play AnimationPlayer test -1
+"step"
+stop AnimationPlayer
+"step"
+
+play AnimatedSprite2D test
+"step"
+pause AnimatedSprite2D
+"step"
+play AnimatedSprite2D test 2
+"step"
+pause AnimatedSprite2D
+"step"
+play AnimatedSprite2D test -1
+"step"
+stop AnimatedSprite2D
+"step"
+
+play AnimatedSprite3D test
+"step"
+pause AnimatedSprite3D
+"step"
+play AnimatedSprite3D test 2
+"step"
+pause AnimatedSprite3D
+"step"
+play AnimatedSprite3D test -1
+"step"
+stop AnimatedSprite3D
+"end"

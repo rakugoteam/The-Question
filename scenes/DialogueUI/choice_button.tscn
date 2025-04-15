@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://xc8pm4yro11u"]
+
+[ext_resource type="Script" uid="uid://bisttr5ciqnoe" path="res://scenes/DialogueUI/choice_button.gd" id="1_t7yrp"]
+[ext_resource type="FontFile" uid="uid://dopnqhkanf1f7" path="res://addons/advanced-text/font/DejaVuSans.ttf" id="2_lfmik"]
+[ext_resource type="Resource" uid="uid://6ioam3qiqsqa" path="res://addons/visualnovelkit/default_markups/def_markdown.tres" id="2_t7yrp"]
+[ext_resource type="FontFile" uid="uid://buj02o26lgfif" path="res://addons/advanced-text/font/DejaVuSansMono.ttf" id="3_65k2t"]
+[ext_resource type="FontFile" uid="uid://dv5f7ykw422ft" path="res://addons/advanced-text/font/DejaVuSans-Oblique.ttf" id="4_lw1ar"]
+[ext_resource type="FontFile" uid="uid://3spkwr34s2bq" path="res://addons/advanced-text/font/DejaVuSans-BoldOblique.ttf" id="5_8x65d"]
+[ext_resource type="FontFile" uid="uid://be1m3xik5j81c" path="res://addons/advanced-text/font/DejaVuSans-Bold.ttf" id="6_rdov7"]
+[ext_resource type="Script" uid="uid://cgbqtpdgyaxq3" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="7_be8xk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t7yrp"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="ChoiceButton" type="PanelContainer" node_paths=PackedStringArray("label")]
+custom_minimum_size = Vector2(100, 0)
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_t7yrp")
+script = ExtResource("1_t7yrp")
+label = NodePath("MarginContainer/AdvancedTextLabel")
+parser = ExtResource("2_t7yrp")
+text = "@center{ @rainbow 0.2,10,20 {**Menu Button**} [mi:button-cursor] :smile: }"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="AdvancedTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_lfmik")
+theme_override_fonts/mono_font = ExtResource("3_65k2t")
+theme_override_fonts/italics_font = ExtResource("4_lw1ar")
+theme_override_fonts/bold_italics_font = ExtResource("5_8x65d")
+theme_override_fonts/bold_font = ExtResource("6_rdov7")
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("7_be8xk")
+advanced_text = "@center{ @rainbow 0.2,10,20 {**Menu Button**} [mi:button-cursor] :smile: }"
+parser = ExtResource("2_t7yrp")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://w2n5oa7ar7vi"]
+
+[ext_resource type="Script" uid="uid://dyub00pc1rk7" path="res://addons/rakugo-nodes/nodes/ProcentContainer.gd" id="1_rupor"]
+[ext_resource type="Script" uid="uid://cgqhnwbo57faw" path="res://scenes/DialogueUI/MenuBox.gd" id="2_x42km"]
+[ext_resource type="PackedScene" uid="uid://xc8pm4yro11u" path="res://scenes/DialogueUI/choice_button.tscn" id="3_4bybj"]
+
+[node name="MenuScrollContainer" type="ScrollContainer"]
+custom_minimum_size = Vector2(576, 504)
+script = ExtResource("1_rupor")
+
+[node name="MenuBox" type="VBoxContainer" parent="." node_paths=PackedStringArray("root")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_x42km")
+root = NodePath("..")
+choice_btn_scene = ExtResource("3_4bybj")

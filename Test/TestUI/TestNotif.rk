@@ -1,0 +1,5 @@
+"start"
+notify: "some notification"
+"step"
+notify 0.3: "some shorter time notification"
+"end"

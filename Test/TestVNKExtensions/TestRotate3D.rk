@@ -1,0 +1,17 @@
+"start"
+show Parent ChildA
+"step"
+rotate 45 up
+"step"
+rotate 45 down
+"step"
+rotate 45 forward
+"step"
+rotate 45 back
+"step"
+rotate 45 left
+"step"
+rotate 45 right
+"step"
+hide Parent
+"end"

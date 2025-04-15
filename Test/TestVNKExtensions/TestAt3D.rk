@@ -1,0 +1,17 @@
+"start"
+show Parent ChildA
+"step"
+at 148 -156 265
+"step"
+at y = 200
+"step"
+at x += 50
+"step"
+at z -= 25
+"step"
+at x /= 2
+"step"
+at x *= 3
+"step"
+hide Parent
+"end"

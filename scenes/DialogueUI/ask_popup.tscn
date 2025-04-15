@@ -1,0 +1,127 @@
+[gd_scene load_steps=12 format=3 uid="uid://i1jql72x1fte"]
+
+[ext_resource type="Script" uid="uid://c3mxbyeeux1v1" path="res://scenes/DialogueUI/AskPopup.gd" id="1_jk00t"]
+[ext_resource type="Script" uid="uid://cgbqtpdgyaxq3" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="2_uk675"]
+[ext_resource type="Resource" uid="uid://6ioam3qiqsqa" path="res://addons/visualnovelkit/default_markups/def_markdown.tres" id="3_k6ano"]
+[ext_resource type="Script" uid="uid://pwyh8365is28" path="res://addons/icons-fonts/nodes/FontIconButton.gd" id="4_cwsf0"]
+[ext_resource type="Script" uid="uid://diswvoymuh7fq" path="res://addons/icons-fonts/resources/FontIconSetting.gd" id="5_s1dce"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cwsf0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t7yrp"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Resource" id="Resource_ebuem"]
+script = ExtResource("5_s1dce")
+icon_font = "MaterialIcons"
+icon_name = "check-circle-outline"
+icon_size = 22
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wdrhs"]
+
+[sub_resource type="Resource" id="Resource_cwsf0"]
+script = ExtResource("5_s1dce")
+icon_font = "MaterialIcons"
+icon_name = "skip-next"
+icon_size = 22
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_s1dce"]
+
+[node name="AskPopup" type="PanelContainer" node_paths=PackedStringArray("line_edit", "character_name_label", "dialogue_label")]
+self_modulate = Color(1, 1, 1, 0.5)
+custom_minimum_size = Vector2(576, 180)
+offset_right = 576.0
+offset_bottom = 180.0
+script = ExtResource("1_jk00t")
+line_edit = NodePath("VBoxContainer/LineEdit")
+character_name_label = NodePath("VBoxContainer/SpeakerLabel")
+dialogue_label = NodePath("VBoxContainer/DialogueLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SpeakerLabel" type="RichTextLabel" parent="VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(30, 40)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_force_pass_scroll_events = false
+scroll_active = false
+script = ExtResource("2_uk675")
+advanced_text = "# Speaker [mi:chat] :speech_balloon:
+"
+parser = ExtResource("3_k6ano")
+metadata/_custom_type_script = "uid://cgbqtpdgyaxq3"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_cwsf0")
+
+[node name="DialogueLabel" type="RichTextLabel" parent="VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(16, 30)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+script = ExtResource("2_uk675")
+advanced_text = "@rainbow 0.2,10,20 {Speaker ask something gay} [mi:chat] :speech_balloon:
+"
+parser = ExtResource("3_k6ano")
+metadata/_custom_type_script = "uid://cgbqtpdgyaxq3"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Default answer"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ConfirmButton" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_t7yrp")
+script = ExtResource("4_cwsf0")
+icon_settings = SubResource("Resource_ebuem")
+label_text = "Confirm"
+label_settings = SubResource("LabelSettings_wdrhs")
+metadata/_custom_type_script = "uid://pwyh8365is28"
+
+[node name="SkipButton" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_t7yrp")
+script = ExtResource("4_cwsf0")
+icon_settings = SubResource("Resource_cwsf0")
+label_text = "Skip"
+label_settings = SubResource("LabelSettings_s1dce")
+metadata/_custom_type_script = "uid://pwyh8365is28"
+
+[connection signal="text_submitted" from="VBoxContainer/LineEdit" to="." method="_on_text_submitted"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ConfirmButton" to="." method="_on_ok_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/SkipButton" to="." method="_on_default_answer_btn_pressed"]

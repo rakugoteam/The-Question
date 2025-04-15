@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ExtendedBBCodeParser" load_steps=6 format=3 uid="uid://bdvu722g6s453"]
+
+[ext_resource type="Script" uid="uid://bqlaav0unm6fo" path="res://addons/advanced-text/parsers/ExtendedBBCodeParser.gd" id="1_2fnoq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ill3"]
+font_size = 22
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x0612"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t668p"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dilyl"]
+font_color = Color(0, 0, 0, 1)
+
+[resource]
+script = ExtResource("1_2fnoq")
+headers = Array[LabelSettings]([SubResource("LabelSettings_1ill3"), SubResource("LabelSettings_x0612"), SubResource("LabelSettings_t668p"), SubResource("LabelSettings_dilyl")])

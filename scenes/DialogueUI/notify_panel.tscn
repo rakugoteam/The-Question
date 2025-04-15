@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://cahg2fobtnlcv"]
+
+[ext_resource type="Script" uid="uid://7nyojh0i8r3l" path="res://scenes/DialogueUI/NotifyPanel.gd" id="1_vufgk"]
+[ext_resource type="Script" uid="uid://cgbqtpdgyaxq3" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="2_e2xjp"]
+[ext_resource type="Resource" uid="uid://6ioam3qiqsqa" path="res://addons/visualnovelkit/default_markups/def_markdown.tres" id="3_lpuoc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e2xjp"]
+
+[node name="NotifyPanel" type="PanelContainer" node_paths=PackedStringArray("notification_label", "timer")]
+self_modulate = Color(1, 1, 1, 0.5)
+anchors_preset = -1
+anchor_left = 0.687
+anchor_right = 1.0
+anchor_bottom = 0.082
+offset_left = -0.360046
+offset_bottom = -0.0400009
+grow_horizontal = 2
+script = ExtResource("1_vufgk")
+notification_label = NodePath("MarginContainer/AdvancedTextLabel")
+timer = NodePath("Timer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="AdvancedTextLabel" type="RichTextLabel" parent="MarginContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(16, 20)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/mono_font_size = 16
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+script = ExtResource("2_e2xjp")
+advanced_text = "@center{ @rainbow 0.2,10,20 {**Notification**} [mi:message-alert-outline] :warning: }"
+font_settings = SubResource("LabelSettings_e2xjp")
+parser = ExtResource("3_lpuoc")
+metadata/_custom_type_script = "uid://cgbqtpdgyaxq3"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

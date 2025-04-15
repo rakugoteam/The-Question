@@ -1,0 +1,43 @@
+"start"
+show Parent
+"step"
+at% 50 50
+"step"
+at 148 -156
+"step"
+at y =200
+"step"
+at x += 50
+"step"
+at x -= 25
+"step"
+at x /=2
+"step"
+at x *= 3
+"step"
+show Parent ChildA
+"step"
+at% 25 25
+"step"
+at 0 0
+"step"
+at center
+"step"
+at left
+"step"
+at right
+"step"
+at top
+"step"
+at top_left
+"step"
+at top_right
+"step"
+at bottom
+"step"
+at bottom_left
+"step"
+at bottom_right
+"step"
+hide Parent
+"end"

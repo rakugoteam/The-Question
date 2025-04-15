@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnsu6sfdku23l"]
+
+[ext_resource type="PackedScene" uid="uid://cahg2fobtnlcv" path="res://scenes/DialogueUI/notify_panel.tscn" id="1_r2n8v"]
+[ext_resource type="PackedScene" uid="uid://i1jql72x1fte" path="res://scenes/DialogueUI/ask_popup.tscn" id="2_i2ljs"]
+[ext_resource type="PackedScene" uid="uid://w2n5oa7ar7vi" path="res://scenes/DialogueUI/menu_container.tscn" id="3_le5op"]
+[ext_resource type="PackedScene" uid="uid://ohgdminvqvtk" path="res://scenes/DialogueUI/say_panel.tscn" id="4_2fi1k"]
+
+[node name="DialogueUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NotifyPanel" parent="." node_paths=PackedStringArray("root") instance=ExtResource("1_r2n8v")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -337.0
+offset_bottom = 38.0
+grow_horizontal = 0
+root = NodePath("..")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AskPopup" parent="VBoxContainer/CenterContainer" node_paths=PackedStringArray("root") instance=ExtResource("2_i2ljs")]
+layout_mode = 2
+root = NodePath("../../..")
+
+[node name="MenuScrollContainer" parent="VBoxContainer/CenterContainer" node_paths=PackedStringArray("root") instance=ExtResource("3_le5op")]
+layout_mode = 2
+root = NodePath("../../..")
+
+[node name="SayPanel" parent="VBoxContainer" node_paths=PackedStringArray("root") instance=ExtResource("4_2fi1k")]
+layout_mode = 2
+root = NodePath("../..")

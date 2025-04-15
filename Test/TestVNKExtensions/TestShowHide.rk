@@ -1,0 +1,13 @@
+"start"
+show Parent
+"step"
+show Parent ChildA ChildAA
+"step"
+show Parent ChildA ChildAB
+"step"
+show Parent ChildA ChildAC
+"step"
+hide Parent ChildA ChildAC
+"step"
+hide Parent
+"end"

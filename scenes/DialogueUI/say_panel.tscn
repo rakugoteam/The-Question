@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://ohgdminvqvtk"]
+
+[ext_resource type="Script" uid="uid://ba71xtrq3au6m" path="res://scenes/DialogueUI/SayPanel.gd" id="1_sqegj"]
+[ext_resource type="Script" uid="uid://cgbqtpdgyaxq3" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="2_xgq2h"]
+[ext_resource type="Resource" uid="uid://6ioam3qiqsqa" path="res://addons/visualnovelkit/default_markups/def_markdown.tres" id="3_tpv6v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xgq2h"]
+
+[node name="SayPanel" type="PanelContainer" node_paths=PackedStringArray("character_name_label", "dialogue_label")]
+self_modulate = Color(1, 1, 1, 0.5)
+custom_minimum_size = Vector2(1280, 180)
+offset_right = 1280.0
+offset_bottom = 180.0
+script = ExtResource("1_sqegj")
+character_name_label = NodePath("VBoxContainer/SpeakerLabel")
+dialogue_label = NodePath("VBoxContainer/DialogueLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SpeakerLabel" type="RichTextLabel" parent="VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(30, 40)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_force_pass_scroll_events = false
+scroll_active = false
+script = ExtResource("2_xgq2h")
+advanced_text = "# Speaker [mi:chat] :speech_balloon:
+"
+parser = ExtResource("3_tpv6v")
+metadata/_custom_type_script = "uid://cgbqtpdgyaxq3"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xgq2h")
+
+[node name="DialogueLabel" type="RichTextLabel" parent="VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(16, 20)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+script = ExtResource("2_xgq2h")
+advanced_text = "@rainbow 0.2,10,20 {Speaker say something gay} [mi:chat] :speech_balloon:
+"
+parser = ExtResource("3_tpv6v")
+metadata/_custom_type_script = "uid://cgbqtpdgyaxq3"
