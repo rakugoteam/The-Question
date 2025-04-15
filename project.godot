@@ -18,10 +18,10 @@ rakugo/save_folder="user://saves"
 
 [application]
 
-config/name="Visual Novel Kit"
+config/name="The Question"
 run/main_scene="res://scenes/Bootstrap/bootstrap.tscn"
 config/features=PackedStringArray("4.4")
-config/icon="res://icon.svg"
+config/icon="uid://n07onypj2st4"
 addons/rakugo_game_template/loading_scene_path="res://scenes/LoadingScreen/LoadingScreen.tscn"
 addons/rakugo_game_template/main_menu_path="res://scenes/MainMenu/MainMenu.tscn"
 addons/rakugo_game_template/first_game_scene_path="res://scenes/Game/game.tscn"
