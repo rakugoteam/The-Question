@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/illurock.mp3-7d763fe23d9d358648bc872fffc108b7
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
