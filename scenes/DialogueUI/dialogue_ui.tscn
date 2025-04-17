@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://w2n5oa7ar7vi" path="res://scenes/DialogueUI/menu_container.tscn" id="3_le5op"]
 [ext_resource type="PackedScene" uid="uid://ohgdminvqvtk" path="res://scenes/DialogueUI/say_panel.tscn" id="4_2fi1k"]
 
-[node name="DialogueUI" type="Control"]
+[node name="DialogueUI" type="Control" groups=["show"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="NotifyPanel" parent="." node_paths=PackedStringArray("root") instance=ExtResource("1_r2n8v")]
+custom_minimum_size = Vector2(512, 50.4)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -22,6 +23,7 @@ offset_left = -337.0
 offset_bottom = 38.0
 grow_horizontal = 0
 root = NodePath("..")
+procent_size = Vector2(40, 7)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -36,14 +38,19 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="AskPopup" parent="VBoxContainer/CenterContainer" node_paths=PackedStringArray("root") instance=ExtResource("2_i2ljs")]
+[node name="AskPopup" parent="VBoxContainer/CenterContainer" node_paths=PackedStringArray("say_panel", "root") instance=ExtResource("2_i2ljs")]
+custom_minimum_size = Vector2(640, 72)
 layout_mode = 2
+say_panel = NodePath("../../SayPanel")
 root = NodePath("../../..")
+procent_size = Vector2(50, 10)
 
 [node name="MenuScrollContainer" parent="VBoxContainer/CenterContainer" node_paths=PackedStringArray("root") instance=ExtResource("3_le5op")]
+custom_minimum_size = Vector2(640, 360)
 layout_mode = 2
 root = NodePath("../../..")
 
 [node name="SayPanel" parent="VBoxContainer" node_paths=PackedStringArray("root") instance=ExtResource("4_2fi1k")]
 layout_mode = 2
 root = NodePath("../..")
+procent_size = Vector2(100, 25)
