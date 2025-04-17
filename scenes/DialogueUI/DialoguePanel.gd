@@ -1,6 +1,6 @@
 @tool
-extends ProcentControl
 class_name DialoguePanel
+extends ProcentControl
 
 @export var character_name_label: AdvancedTextLabel = null
 @export var dialogue_label: AdvancedTextLabel = null
