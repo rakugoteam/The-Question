@@ -5,14 +5,14 @@ const file_path = "res://Test/TestUI/TestMenu.rk"
 
 var file_base_name = get_file_base_name(file_path)
 
-func assert_menu_ui_choices(menu_box:Node, choices:Array):
+func assert_menu_ui_choices(menu_box: Node, choices: Array):
 	for id in choices.size():
-		var choice := menu_box.get_child(id) as AdvancedTextButton
+		var choice := menu_box.get_child(id) as ChoiceButton
 		assert_not_null(choice)
-		assert_eq(choices[id], choice._text)
+		assert_eq(choices[id], choice.text)
 
-func assert_menu_ui_return(menu_box:Node, choice_id:int):
-	var choice := menu_box.get_child(choice_id) as AdvancedTextButton
+func assert_menu_ui_return(menu_box: Node, choice_id: int):
+	var choice := menu_box.get_child(choice_id) as ChoiceButton
 	assert_not_null(choice)
 	choice.pressed.emit()
 
