@@ -12,8 +12,7 @@ func _ready():
 	if character_name_label:
 		character_name_label.parser = markup
 	
-	if dialogue_label:
-		dialogue_label.parser = markup
+	if dialogue_label: dialogue_label.parser = markup
 
 	visibility_changed.connect(_on_visibility_changed)
 	
