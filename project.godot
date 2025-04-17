@@ -62,6 +62,10 @@ script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "rk")
 
 enabled=PackedStringArray("res://addons/Rakugo/plugin.cfg", "res://addons/advanced-text/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/icons-fonts/plugin.cfg", "res://addons/rakugo-nodes/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg", "res://addons/rakugo_regex_lab/plugin.cfg", "res://addons/visualnovelkit/plugin.cfg")
 
+[global_group]
+
+show=""
+
 [gui]
 
 theme/custom_font="res://addons/advanced-text/font/DejaVuSans.ttf"
