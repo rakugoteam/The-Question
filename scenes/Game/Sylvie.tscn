@@ -9,39 +9,39 @@
 [ext_resource type="Texture2D" uid="uid://q0cwiausgj67" path="res://the_question-og/images/sylvie green smile.png" id="7_pf5qh"]
 [ext_resource type="Texture2D" uid="uid://dopilfdnfwvmm" path="res://the_question-og/images/sylvie green surprised.png" id="8_efgj8"]
 
-[node name="Sylvie" type="Node2D"]
+[node name="sylvie" type="Node2D" groups=["show"]]
 
-[node name="Blue" type="Node2D" parent="."]
+[node name="blue" type="Node2D" parent="."]
 
-[node name="Giggle" type="Sprite2D" parent="Blue"]
+[node name="giggle" type="Sprite2D" parent="blue"]
 visible = false
 texture = ExtResource("1_yld8b")
 
-[node name="Normal" type="Sprite2D" parent="Blue"]
+[node name="normal" type="Sprite2D" parent="blue"]
 texture = ExtResource("2_buhsy")
 
-[node name="Smile" type="Sprite2D" parent="Blue"]
+[node name="smile" type="Sprite2D" parent="blue"]
 visible = false
 texture = ExtResource("3_5p1fk")
 
-[node name="Surprised" type="Sprite2D" parent="Blue"]
+[node name="surprised" type="Sprite2D" parent="blue"]
 visible = false
 texture = ExtResource("4_sr4an")
 
-[node name="Green" type="Node2D" parent="."]
+[node name="green" type="Node2D" parent="."]
 
-[node name="Giggle" type="Sprite2D" parent="Green"]
+[node name="giggle" type="Sprite2D" parent="green"]
 visible = false
 texture = ExtResource("5_6222v")
 
-[node name="Normal" type="Sprite2D" parent="Green"]
+[node name="normal" type="Sprite2D" parent="green"]
 visible = false
 texture = ExtResource("6_bvrtr")
 
-[node name="Smile" type="Sprite2D" parent="Green"]
+[node name="smile" type="Sprite2D" parent="green"]
 visible = false
 texture = ExtResource("7_pf5qh")
 
-[node name="Surprised" type="Sprite2D" parent="Green"]
+[node name="surprised" type="Sprite2D" parent="green"]
 visible = false
 texture = ExtResource("8_efgj8")
