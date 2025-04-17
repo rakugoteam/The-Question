@@ -58,4 +58,4 @@ func wait_do_step(say_text := "step"):
 	assert_do_step()
 
 func assert_adv_text(adv_text: AdvancedTextLabel, text: String):
-	assert_eq(adv_text._text, text)
+	assert_eq(adv_text.advanced_text, text)

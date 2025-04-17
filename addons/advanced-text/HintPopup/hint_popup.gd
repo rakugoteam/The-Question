@@ -6,11 +6,11 @@ var mouse_in := false
 var text := "":
 	set(value):
 		if not is_node_ready(): return
-		%AdvancedTextLabel._text = value
+		%AdvancedTextLabel.advanced_text = value
 
 	get:
 		if not is_node_ready(): return ""
-		return %AdvancedTextLabel._text
+		return %AdvancedTextLabel.advanced_text
 
 func get_rect() -> Rect2:
 	if not is_node_ready(): return Rect2()
@@ -22,7 +22,7 @@ func _ready():
 
 func _on_popup():
 	if not visible: return
-	var viewport_size := get_tree().root\
+	var viewport_size := get_tree().root \
 		.get_viewport().get_visible_rect().size
 	var popup_size := size
 	var new_position := position
@@ -35,7 +35,7 @@ func _on_popup():
 	elif new_position.y + popup_size.y > viewport_size.y:
 		new_position.y = int(viewport_size.y - popup_size.y)
 
-	position = new_position 
+	position = new_position
 	
 	%ScrollContainer.scroll_vertical = 0
 	%ScrollContainer.scroll_horizontal = 0
