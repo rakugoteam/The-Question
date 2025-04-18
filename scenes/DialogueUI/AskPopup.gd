@@ -8,6 +8,7 @@ extends ProcentControl
 func _ready():
 	if Engine.is_editor_hint(): return
 	Rakugo.sg_ask.connect(_on_ask)
+	hide()
 
 func _on_ask(character: Dictionary, question: String, default_answer: String):
 	line_edit.placeholder_text = default_answer
