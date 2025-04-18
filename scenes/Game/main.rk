@@ -4,9 +4,11 @@ s.color = "#c8ffc8"
 character m "Me"
 m.color = "#c8c8ff"
 
-# This is a variable that is true if
-# you've compared a VN to a book, false otherwise.
-book = false
+# This is a variable that is 1 if
+# you've compared a VN to a book, 0 otherwise.
+# we must use 0 and 1 as true/false doesn't work in Rakugo yet.
+vn_is_book = 0
+jump start
 
 start:
 
@@ -80,7 +82,7 @@ rightaway:
 
 	show sylvie green smile
 
-	s "Sure, but what's a \"visual novel?\""
+	s "Sure, but what's a "visual novel?""
 	menu:
 		"It's a videogame." > game
 		"It's an interactive book." > book
@@ -112,7 +114,7 @@ game:
 
 book:
 
-	book = true
+	vn_is_book = 1
 
 	m "It's like an interactive book that you can read on a computer or a console."
 
@@ -122,7 +124,7 @@ book:
 
 	m "You can make choices that lead to different events and endings in the story."
 
-	s "So where does the \"visual\" part come in?"
+	s "So where does the "visual" part come in?"
 
 	m "Visual novels have pictures and even music, sound effects, and sometimes voice acting to go along with the text."
 
@@ -146,7 +148,10 @@ marry:
 
 	"Over the years, we make lots of games and have a lot of fun making them."
 
-	jump marry_book if book
+	# Rakugo has only 'jump if' for now
+	# We need to use 'book == 1',
+	# true/false are not supported in rakugo yet
+	jump marry_book if vn_is_book == 1
 	jump marry_2
 
 marry_book:

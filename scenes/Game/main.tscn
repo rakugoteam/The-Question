@@ -14,6 +14,5 @@ position = Vector2(623, 370)
 [node name="RakuScriptDialogue" type="Node" parent="."]
 script = ExtResource("3_r4rr0")
 raku_script = "res://scenes/Game/main.rk"
-starting_label_name = "start"
 auto_start = true
 metadata/_custom_type_script = "uid://d1fegtsffsy24"
