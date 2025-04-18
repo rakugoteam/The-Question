@@ -83,8 +83,7 @@ rightaway:
 	s "Sure, but what's a \"visual novel?\""
 	menu:
 		"It's a videogame." > game
-		"It's an interactive book." > jump book
-
+		"It's an interactive book." > book
 
 game:
 
