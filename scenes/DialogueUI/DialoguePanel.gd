@@ -13,9 +13,7 @@ func _ready():
 		character_name_label.parser = markup
 	
 	if dialogue_label: dialogue_label.parser = markup
-
 	visibility_changed.connect(_on_visibility_changed)
-	
 	visible = Engine.is_editor_hint()
 	set_process(false)
 
@@ -23,18 +21,15 @@ func set_labels(character: Dictionary, text: String):
 	show()
 	
 	var character_name = character.get("name", "")
-
 	if not character_name:
 		character_name_label.advanced_text = ""
 	
 	else:
 		var name_label = "[h1]%s[/h1]" % character_name
-
 		if markup is MarkdownParser:
 			name_label = "# %s\n" % character_name
 
 		var character_color = character.get("color", null)
-		
 		if character_color:
 			name_label = "[color=%s]%s[/color]" % [character_color, name_label]
 		

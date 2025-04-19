@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ohgdminvqvtk"]
+[gd_scene load_steps=10 format=3 uid="uid://ohgdminvqvtk"]
 
 [ext_resource type="Script" uid="uid://ba71xtrq3au6m" path="res://scenes/DialogueUI/SayPanel.gd" id="1_sqegj"]
 [ext_resource type="Script" uid="uid://cgbqtpdgyaxq3" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="2_xgq2h"]
@@ -8,7 +8,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xgq2h"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ja8ui"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpwp7"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -32,7 +32,9 @@ shadow_color = Color(1, 1, 1, 1)
 shadow_size = 0
 shadow_offset = Vector2(0, 0)
 
-[node name="SayPanel" type="PanelContainer" node_paths=PackedStringArray("character_name_label", "dialogue_label") groups=["show"]]
+[sub_resource type="LabelSettings" id="LabelSettings_fpwp7"]
+
+[node name="SayPanel" type="PanelContainer" node_paths=PackedStringArray("next_btn", "character_name_label", "dialogue_label") groups=["show"]]
 self_modulate = Color(1, 1, 1, 0.5)
 custom_minimum_size = Vector2(1280, 180)
 anchors_preset = 12
@@ -44,6 +46,7 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
 script = ExtResource("1_sqegj")
+next_btn = NodePath("HBoxContainer/NextButton")
 character_name_label = NodePath("HBoxContainer/VBoxContainer/SpeakerLabel")
 dialogue_label = NodePath("HBoxContainer/VBoxContainer/DialogueLabel")
 procent_size = Vector2(100, 30)
@@ -92,10 +95,9 @@ metadata/_custom_type_script = "uid://cgbqtpdgyaxq3"
 [node name="NextButton" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ja8ui")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fpwp7")
 script = ExtResource("4_fpwp7")
 layout_order = "Icon"
 icon_settings = SubResource("Resource_8dka6")
+label_settings = SubResource("LabelSettings_fpwp7")
 metadata/_custom_type_script = "uid://pwyh8365is28"
-
-[connection signal="pressed" from="HBoxContainer/NextButton" to="." method="_on_next_btn_pressed"]

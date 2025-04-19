@@ -2,19 +2,22 @@
 class_name SayPanel
 extends DialoguePanel
 
+@export var next_btn: FontIconButton
+
 func _ready():
-	if Engine.is_editor_hint(): return
 	super._ready()
+	if Engine.is_editor_hint(): return
 	Rakugo.sg_say.connect(set_labels)
+	if next_btn: next_btn.pressed.connect(_on_next_btn_pressed)
 
 func _on_say(character: Dictionary, text: String):
 	set_labels(character, text)
+	show()
 
 func _process(_delta: float):
-	if Engine.is_editor_hint(): return
-	
 	if Input.is_action_just_pressed("ui_accept"):
-		Rakugo.do_step()
+		_on_next_btn_pressed()
 
 func _on_next_btn_pressed():
 	Rakugo.do_step()
+	hide()
