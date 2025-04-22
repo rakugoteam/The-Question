@@ -11,9 +11,7 @@ extends Control
 @export var procent_size := Vector2(100, 100):
 	set(value):
 		if !is_node_ready(): await ready
-		if !Engine.is_editor_hint():
-			push_warning("Changing procent_size works only inside Editor")
-			return
+		if !Engine.is_editor_hint(): return
 		
 		procent_size = value
 		if root: custom_minimum_size = root.size * (procent_size / 100.0)
