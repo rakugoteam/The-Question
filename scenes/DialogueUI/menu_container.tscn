@@ -4,14 +4,28 @@
 [ext_resource type="Script" uid="uid://cgqhnwbo57faw" path="res://scenes/DialogueUI/MenuBox.gd" id="2_x42km"]
 [ext_resource type="PackedScene" uid="uid://xc8pm4yro11u" path="res://scenes/DialogueUI/choice_button.tscn" id="3_4bybj"]
 
-[node name="MenuScrollContainer" type="ScrollContainer"]
+[node name="MenuScrollContainer" type="ScrollContainer" groups=["show"]]
 custom_minimum_size = Vector2(576, 504)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -252.0
+offset_right = 288.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_rupor")
+procent_size = Vector2(50, 50)
 
 [node name="MenuBox" type="VBoxContainer" parent="." node_paths=PackedStringArray("root")]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 6
 script = ExtResource("2_x42km")
 root = NodePath("..")
 choice_btn_scene = ExtResource("3_4bybj")

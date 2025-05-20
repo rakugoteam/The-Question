@@ -39,8 +39,7 @@ func assert_dialogue_panel(dialogue_panel: DialoguePanel):
 		dialogue_panel.character_name_label,
 		dialogue_panel.dialogue_label
 	]
-	for node in nodes:
-		assert_not_null(node)
+	for node in nodes: assert_not_null(node)
 
 func assert_dialogue_panel_text(dialogue_panel: DialoguePanel, character_name, dialogue_text):
 	assert_adv_text(dialogue_panel.character_name_label, character_name)
@@ -58,4 +57,4 @@ func wait_do_step(say_text := "step"):
 	assert_do_step()
 
 func assert_adv_text(adv_text: AdvancedTextLabel, text: String):
-	assert_eq(adv_text._text, text)
+	assert_eq(adv_text.advanced_text, text)

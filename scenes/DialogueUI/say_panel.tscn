@@ -1,24 +1,64 @@
-[gd_scene load_steps=5 format=3 uid="uid://ohgdminvqvtk"]
+[gd_scene load_steps=10 format=3 uid="uid://ohgdminvqvtk"]
 
 [ext_resource type="Script" uid="uid://ba71xtrq3au6m" path="res://scenes/DialogueUI/SayPanel.gd" id="1_sqegj"]
 [ext_resource type="Script" uid="uid://cgbqtpdgyaxq3" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="2_xgq2h"]
 [ext_resource type="Resource" uid="uid://6ioam3qiqsqa" path="res://addons/visualnovelkit/default_markups/def_markdown.tres" id="3_tpv6v"]
+[ext_resource type="Script" uid="uid://pwyh8365is28" path="res://addons/icons-fonts/nodes/FontIconButton.gd" id="4_fpwp7"]
+[ext_resource type="Script" uid="uid://diswvoymuh7fq" path="res://addons/icons-fonts/resources/FontIconSetting.gd" id="5_xk78c"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xgq2h"]
 
-[node name="SayPanel" type="PanelContainer" node_paths=PackedStringArray("character_name_label", "dialogue_label")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpwp7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Resource" id="Resource_8dka6"]
+script = ExtResource("5_xk78c")
+icon_font = "MaterialIcons"
+icon_name = "forward"
+icon_size = 51
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fpwp7"]
+
+[node name="SayPanel" type="PanelContainer" node_paths=PackedStringArray("next_btn", "character_name_label", "dialogue_label") groups=["show"]]
 self_modulate = Color(1, 1, 1, 0.5)
 custom_minimum_size = Vector2(1280, 180)
-offset_right = 1280.0
-offset_bottom = 180.0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
 script = ExtResource("1_sqegj")
-character_name_label = NodePath("VBoxContainer/SpeakerLabel")
-dialogue_label = NodePath("VBoxContainer/DialogueLabel")
+next_btn = NodePath("HBoxContainer/NextButton")
+character_name_label = NodePath("HBoxContainer/VBoxContainer/SpeakerLabel")
+dialogue_label = NodePath("HBoxContainer/VBoxContainer/DialogueLabel")
+procent_size = Vector2(100, 30)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="SpeakerLabel" type="RichTextLabel" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpeakerLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(30, 40)
 layout_mode = 2
@@ -31,12 +71,12 @@ advanced_text = "# Speaker [mi:chat] :speech_balloon:
 parser = ExtResource("3_tpv6v")
 metadata/_custom_type_script = "uid://cgbqtpdgyaxq3"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_xgq2h")
 
-[node name="DialogueLabel" type="RichTextLabel" parent="VBoxContainer"]
+[node name="DialogueLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(16, 20)
 layout_mode = 2
@@ -51,3 +91,13 @@ advanced_text = "@rainbow 0.2,10,20 {Speaker say something gay} [mi:chat] :speec
 "
 parser = ExtResource("3_tpv6v")
 metadata/_custom_type_script = "uid://cgbqtpdgyaxq3"
+
+[node name="NextButton" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fpwp7")
+script = ExtResource("4_fpwp7")
+layout_order = "Icon"
+icon_settings = SubResource("Resource_8dka6")
+label_settings = SubResource("LabelSettings_fpwp7")
+metadata/_custom_type_script = "uid://pwyh8365is28"

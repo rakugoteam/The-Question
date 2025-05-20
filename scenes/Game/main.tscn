@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://du8wlrf3x8vc0"]
+
+[ext_resource type="PackedScene" uid="uid://pgp7r5an2h8c" path="res://scenes/Game/bgs.tscn" id="1_g7xkg"]
+[ext_resource type="PackedScene" uid="uid://de5coe3ghvxle" path="res://scenes/Game/Sylvie.tscn" id="2_r4rr0"]
+[ext_resource type="Script" uid="uid://d1fegtsffsy24" path="res://addons/Rakugo/lib/nodes/RakuScriptDialogue.gd" id="3_r4rr0"]
+
+[node name="Game" type="Node2D"]
+
+[node name="bg" parent="." instance=ExtResource("1_g7xkg")]
+
+[node name="sylvie" parent="." instance=ExtResource("2_r4rr0")]
+position = Vector2(623, 370)
+
+[node name="RakuScriptDialogue" type="Node" parent="."]
+script = ExtResource("3_r4rr0")
+raku_script = "res://scenes/Game/main.rk"
+auto_start = true
+metadata/_custom_type_script = "uid://d1fegtsffsy24"

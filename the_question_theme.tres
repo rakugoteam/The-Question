@@ -1,0 +1,12 @@
+[gd_resource type="Theme" format=3 uid="uid://bubl284qwoqf8"]
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(0.996078, 0.996078, 0.996078, 1)
+Button/colors/font_hover_color = Color(0.996078, 0.321569, 0.321569, 1)
+Button/colors/font_hover_pressed_color = Color(0.65098, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0.996078, 0, 0, 1)
+Button/constants/outline_size = 8
+Button/font_sizes/font_size = 32
+Label/font_sizes/font_size = 32
