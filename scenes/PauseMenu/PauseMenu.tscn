@@ -65,6 +65,12 @@ custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Resume"
 
+[node name="HistoryButton" type="Button" parent="BoxContainer/MenuContainer/VBoxContainer/MenuButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 40)
+layout_mode = 2
+text = "Resume"
+
 [node name="SaveButton" type="Button" parent="BoxContainer/MenuContainer/VBoxContainer/MenuButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 40)
@@ -94,7 +100,15 @@ custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Exit Game"
 
-[node name="SubMenuContainer" type="MarginContainer" parent="BoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="BoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+current_tab = 1
+tabs_visible = false
+
+[node name="SubMenuContainer" type="MarginContainer" parent="BoxContainer/TabContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -103,15 +117,16 @@ theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
+metadata/_tab_index = 0
 
-[node name="Panel" type="Panel" parent="BoxContainer/SubMenuContainer"]
+[node name="Panel" type="Panel" parent="BoxContainer/TabContainer/SubMenuContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/SubMenuContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/TabContainer/SubMenuContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="BoxContainer/SubMenuContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="BoxContainer/TabContainer/SubMenuContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 8
@@ -119,24 +134,24 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="OptionsContainer" parent="BoxContainer/SubMenuContainer/VBoxContainer/MarginContainer" instance=ExtResource("4_pyl8d")]
+[node name="OptionsContainer" parent="BoxContainer/TabContainer/SubMenuContainer/VBoxContainer/MarginContainer" instance=ExtResource("4_pyl8d")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HistoryContainer" type="MarginContainer" parent="BoxContainer"]
+[node name="HistoryContainer" type="MarginContainer" parent="BoxContainer/TabContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
+metadata/_tab_index = 1
 
-[node name="Panel" type="Panel" parent="BoxContainer/HistoryContainer"]
+[node name="Panel" type="Panel" parent="BoxContainer/TabContainer/HistoryContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="BoxContainer/HistoryContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="BoxContainer/TabContainer/HistoryContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 8
@@ -144,10 +159,10 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="BoxContainer/HistoryContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="BoxContainer/TabContainer/HistoryContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="HistoryLogContainer" type="VBoxContainer" parent="BoxContainer/HistoryContainer/MarginContainer/ScrollContainer"]
+[node name="HistoryLogContainer" type="VBoxContainer" parent="BoxContainer/TabContainer/HistoryContainer/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -172,6 +187,7 @@ unique_name_in_owner = true
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="BoxContainer/MenuContainer/VBoxContainer/MenuButtons/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="BoxContainer/MenuContainer/VBoxContainer/MenuButtons/HistoryButton" to="." method="_on_history_button_pressed"]
 [connection signal="pressed" from="BoxContainer/MenuContainer/VBoxContainer/MenuButtons/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="BoxContainer/MenuContainer/VBoxContainer/MenuButtons/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="BoxContainer/MenuContainer/VBoxContainer/MenuButtons/OptionsButton" to="." method="_on_options_button_pressed"]
