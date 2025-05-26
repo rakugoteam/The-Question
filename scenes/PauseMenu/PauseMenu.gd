@@ -15,20 +15,22 @@ const confirm_quit = "Do you want to save before quit the Game ?"
 @onready var accept_dialog = %AcceptDialog
 @onready var accept_dialog_ok_button = accept_dialog.get_ok_button()
 
-enum After_Save {do_nothing, quit, go_back_to_main_menu}
+enum After_Save{do_nothing, quit, go_back_to_main_menu}
 
 var after_save := After_Save.do_nothing
 
 func _process(_delta):
 	if visible and Input.is_action_just_pressed("ui_cancel"):
-		%TabContainer.hide()
+		if sub_menu_container.visible:
+			sub_menu_container.visible = false
+		
 		_on_resume_button_pressed()
 
 func _ready():
 	if OS.has_feature("web"):
 		%ExitButton.hide()
 
-	var accept_dialog_label: Label = accept_dialog.get_label()
+	var accept_dialog_label : Label = accept_dialog.get_label()
 	accept_dialog_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	accept_dialog_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	
@@ -45,7 +47,6 @@ func _on_restart_button_pressed():
 	confirm_dialog.popup_centered()
 
 func _on_options_button_pressed():
-	%TabContainer.show()
 	sub_menu_container.show()
 
 func _on_main_menu_button_pressed():
@@ -71,6 +72,7 @@ func _on_confirm_main_menu_confirmed():
 	
 func return_to_main_menu():
 	hide()
+			
 	SceneLoader.change_scene(RGT_Globals.main_menu_setting)
 
 func _on_confirm_exit_confirmed():
@@ -95,7 +97,7 @@ func _on_save_button_pressed() -> void:
 	
 	ask_to_save.emit()
 
-func save_this_please(data: Dictionary):
+func save_this_please(data:Dictionary):
 	if SaveHelper.save(data) == OK:
 		accept_dialog.hide()
 		
@@ -113,7 +115,6 @@ func save_this_please(data: Dictionary):
 		
 		accept_dialog.dialog_text = "The game is saved !"
 		accept_dialog.popup_centered()
-
 	else:
 		accept_dialog.dialog_text = "Cannot save the game !
 			(you do not have enought space or permission rights do to it)"
@@ -123,7 +124,7 @@ func save_this_please(data: Dictionary):
 	accept_dialog_ok_button.disabled = false
 
 func _on_accept_dialog_confirmed() -> void:
-	match (after_save):
+	match(after_save):
 		After_Save.quit:
 			quit()
 			
@@ -131,7 +132,3 @@ func _on_accept_dialog_confirmed() -> void:
 			return_to_main_menu()
 	
 	save_button.disabled = false
-
-func _on_history_button_pressed() -> void:
-	%TabContainer.show()
-	%HistoryContainer.show()
