@@ -7,7 +7,7 @@ m.color = "#c8c8ff"
 # This is a variable that is 1 if
 # you've compared a VN to a book, 0 otherwise.
 # we must use 0 and 1 as true/false doesn't work in Rakugo yet.
-vn_is_book = false
+vn_is_book = 0
 jump start
 
 start:
@@ -114,7 +114,7 @@ game:
 
 book:
 
-	vn_is_book = true
+	vn_is_book = 1
 
 	m "It's like an interactive book that you can read on a computer or a console."
 
@@ -151,7 +151,7 @@ marry:
 	# Rakugo has only 'jump if' for now
 	# We need to use 'book == 1',
 	# true/false are not supported in rakugo yet
-	jump marry_book if vn_is_book
+	jump marry_book if vn_is_book == 1
 	jump marry_2
 
 marry_book:
