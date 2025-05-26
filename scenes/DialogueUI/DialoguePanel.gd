@@ -26,7 +26,7 @@ func set_labels(character: Dictionary, text: String):
 	var character_name = character.get("name", "")
 
 	if not character_name:
-		character_name_label._text = ""
+		character_name_label.advanced_text = ""
 	
 	else:
 		var name_label = "[h1]%s[/h1]" % character_name
@@ -39,9 +39,9 @@ func set_labels(character: Dictionary, text: String):
 		if character_color:
 			name_label = "[color=%s]%s[/color]" % [character_color, name_label]
 		
-		character_name_label._text = name_label
+		character_name_label.advanced_text = name_label
 	
-	dialogue_label._text = text
+	dialogue_label.advanced_text = text
 
 func _on_visibility_changed():
 	set_process(visible)
