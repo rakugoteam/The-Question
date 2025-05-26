@@ -8,7 +8,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xgq2h"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uk675"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpwp7"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -41,24 +41,32 @@ offset_right = 1280.0
 offset_bottom = 85.0
 size_flags_horizontal = 3
 script = ExtResource("1_sqegj")
-next_btn = NodePath("HBoxContainer/NextButton")
-character_name_label = NodePath("HBoxContainer/VBoxContainer/SpeakerLabel")
-dialogue_label = NodePath("HBoxContainer/VBoxContainer/DialogueLabel")
+next_btn = NodePath("MarginContainer/HBoxContainer/NextButton")
+character_name_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/SpeakerLabel")
+dialogue_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/DialogueLabel")
 procent_size = Vector2(100, 30)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SpeakerLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+[node name="SpeakerLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(30, 40)
 layout_mode = 2
 size_flags_vertical = 0
 mouse_force_pass_scroll_events = false
+fit_content = true
 scroll_active = false
 script = ExtResource("2_xgq2h")
 advanced_text = "# Speaker [mi:chat] :speech_balloon:
@@ -66,12 +74,12 @@ advanced_text = "# Speaker [mi:chat] :speech_balloon:
 parser = ExtResource("3_tpv6v")
 metadata/_custom_type_script = "uid://cgbqtpdgyaxq3"
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_xgq2h")
 
-[node name="DialogueLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+[node name="DialogueLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(16, 20)
 layout_mode = 2
@@ -81,16 +89,18 @@ theme_override_font_sizes/italics_font_size = 22
 theme_override_font_sizes/mono_font_size = 22
 theme_override_font_sizes/normal_font_size = 22
 theme_override_font_sizes/bold_font_size = 22
+fit_content = true
+scroll_active = false
 script = ExtResource("2_xgq2h")
 advanced_text = "@rainbow 0.2,10,20 {Speaker say something gay} [mi:chat] :speech_balloon:
 "
 parser = ExtResource("3_tpv6v")
 metadata/_custom_type_script = "uid://cgbqtpdgyaxq3"
 
-[node name="NextButton" type="PanelContainer" parent="HBoxContainer"]
+[node name="NextButton" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_uk675")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fpwp7")
 script = ExtResource("4_fpwp7")
 layout_order = "Icon"
 icon_settings = SubResource("Resource_8dka6")
