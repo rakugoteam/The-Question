@@ -18,8 +18,8 @@ rakugo/save_folder="user://saves"
 
 [application]
 
-config/name="Rakugo Game Template"
-config/version="0.0.0"
+config/name="The Question"
+config/version="1.0.0"
 run/main_scene="res://scenes/Bootstrap/bootstrap.tscn"
 config/features=PackedStringArray("4.4")
 config/icon="res://icon.svg"
