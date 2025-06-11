@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://pgp7r5an2h8c"]
 
-[ext_resource type="Texture2D" uid="uid://cxl6yu0ld2rw8" path="res://the_question-og/gui/images/bg club.jpg" id="1_afcop"]
-[ext_resource type="Texture2D" uid="uid://bj61e3egg00x0" path="res://the_question-og/gui/images/bg lecturehall.jpg" id="2_yu0b1"]
-[ext_resource type="Texture2D" uid="uid://ckp58fioirv00" path="res://the_question-og/gui/images/bg meadow.jpg" id="3_hy25q"]
-[ext_resource type="Texture2D" uid="uid://dj5n5pn75ar61" path="res://the_question-og/gui/images/bg uni.jpg" id="4_xqli7"]
+[ext_resource type="Texture2D" uid="uid://cxl6yu0ld2rw8" path="res://the_question-og/images/bg club.jpg" id="1_afcop"]
+[ext_resource type="Texture2D" uid="uid://bj61e3egg00x0" path="res://the_question-og/images/bg lecturehall.jpg" id="2_yu0b1"]
+[ext_resource type="Texture2D" uid="uid://ckp58fioirv00" path="res://the_question-og/images/bg meadow.jpg" id="3_hy25q"]
+[ext_resource type="Texture2D" uid="uid://dj5n5pn75ar61" path="res://the_question-og/images/bg uni.jpg" id="4_xqli7"]
 
 [node name="bg" type="Node2D" groups=["show"]]
 
