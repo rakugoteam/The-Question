@@ -23,7 +23,7 @@ func _ready():
 			"^notify( +({NUMERIC}) *)? *: *({STRING})$")
 		Rakugo.sg_custom_regex.connect(_on_custom_regex)
 
-func _on_custom_regex(key:String, result:RegExMatch):
+func _on_custom_regex(key: String, result: RegExMatch):
 	match key:
 		"notification":
 			var text := result.get_string(3)
@@ -35,10 +35,8 @@ func _on_custom_regex(key:String, result:RegExMatch):
 			
 			if !visible: show()
 			notify_ready.emit()
+			VisualNovelKit.add_history_log(["notify", text])
 			
 			timer.start(time)
 			await timer.timeout
 			hide()
-
-
-

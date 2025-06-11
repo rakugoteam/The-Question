@@ -28,13 +28,14 @@ shadow_color = Color(1, 1, 1, 1)
 shadow_size = 0
 shadow_offset = Vector2(0, 0)
 
-[node name="HistoryLog" type="PanelContainer" node_paths=PackedStringArray("icon", "character_name_label", "dialogue_label")]
+[node name="HistoryLog" type="PanelContainer" node_paths=PackedStringArray("icon", "answer_label", "character_name_label", "dialogue_label")]
 self_modulate = Color(1, 1, 1, 0.5)
 offset_right = 1280.0
 offset_bottom = 85.0
 size_flags_horizontal = 3
 script = ExtResource("1_op6go")
 icon = NodePath("VBoxContainer/HBoxContainer/FontIcon")
+answer_label = NodePath("VBoxContainer/AnwserLabel")
 character_name_label = NodePath("VBoxContainer/HBoxContainer/SpeakerLabel")
 dialogue_label = NodePath("VBoxContainer/DialogueLabel")
 disabled = true
@@ -70,6 +71,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_force_pass_scroll_events = false
+fit_content = true
 scroll_active = false
 script = ExtResource("2_8jngy")
 advanced_text = "# Speaker [mi:chat] :speech_balloon:
@@ -92,6 +94,7 @@ theme_override_font_sizes/italics_font_size = 22
 theme_override_font_sizes/mono_font_size = 22
 theme_override_font_sizes/normal_font_size = 22
 theme_override_font_sizes/bold_font_size = 22
+fit_content = true
 script = ExtResource("2_8jngy")
 advanced_text = "@rainbow 0.2,10,20 {Speaker say something gay} [mi:chat] :speech_balloon:
 "
@@ -113,6 +116,7 @@ theme_override_font_sizes/italics_font_size = 22
 theme_override_font_sizes/mono_font_size = 22
 theme_override_font_sizes/normal_font_size = 22
 theme_override_font_sizes/bold_font_size = 22
+fit_content = true
 script = ExtResource("2_8jngy")
 advanced_text = " **Anwser:** _some choice_ "
 parser = ExtResource("3_yx0pc")

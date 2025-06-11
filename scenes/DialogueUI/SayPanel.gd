@@ -11,6 +11,7 @@ func _ready():
 	if next_btn: next_btn.pressed.connect(_on_next_btn_pressed)
 
 func _on_say(character: Dictionary, text: String):
+	VisualNovelKit.add_history_log(["say", character, text])
 	set_labels(character, text)
 	show()
 

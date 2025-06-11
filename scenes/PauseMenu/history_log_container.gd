@@ -13,6 +13,7 @@ func _ready():
 	add_history_log.connect(_on_history_log)
 
 func _on_history_log(args: Array):
+	prints("log hist:", args)
 	match args[0]:
 		"say": _on_say(args[1], args[2])
 		"ask": _on_ask_return(args[1], args[2], args[3])
@@ -21,21 +22,23 @@ func _on_history_log(args: Array):
 
 func _on_say(character: Dictionary, text: String):
 	log_ui = history_log_scene.instantiate()
+	# await get_tree().process_frame
 	log_ui.icon.icon_settings.icon_name = "chat"
 	log_ui.set_labels(character, text)
 	log_ui.answer_label.hide()
 	add_child(log_ui)
-	await get_tree().process_frame
-	scroll.ensure_control_visible(log_ui)
+	log_ui.show()
+	# scroll.ensure_control_visible(log_ui)
 
 func _on_ask_return(character: Dictionary, question: String, answer: String):
 	log_ui = history_log_scene.instantiate()
+	# await get_tree().process_frame
 	log_ui.icon.icon_settings.icon_name = "chat-question"
 	log_ui.set_labels(character, question)
 	log_ui.answer_label.advanced_text = " **Answer:** _%s_ " % answer
 	add_child(log_ui)
-	await get_tree().process_frame
-	scroll.ensure_control_visible(log_ui)
+	log_ui.show()
+	# scroll.ensure_control_visible(log_ui)
 
 func _on_menu_return(choice_text: String):
 	# ! we use here last crated log ui for say
@@ -44,10 +47,15 @@ func _on_menu_return(choice_text: String):
 	log_ui.answer_label.advanced_text = " **Choice:** _%s_ " % choice_text
 
 func _on_notify(notify_text: String):
+	log_ui = history_log_scene.instantiate()
+	# await get_tree().process_frame
 	log_ui.character_name_label.advanced_text = "# Notification "
 	log_ui.dialogue_label.advanced_text = notify_text
 	log_ui.icon.icon_settings.icon_name = "alert"
 	log_ui.answer_label.hide()
 	add_child(log_ui)
-	await get_tree().process_frame
-	scroll.ensure_control_visible(log_ui)
+	log_ui.show()
+	# scroll.ensure_control_visible(log_ui)
+
+# func _on_visibility_changed() -> void:
+# 	scroll.ensure_control_visible(log_ui)

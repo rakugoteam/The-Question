@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbxrmlo8ocuvk" path="res://scenes/PauseMenu/PauseMenu.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dnlyj8r7kuvas" path="res://scenes/RGT_Dialogs/RGT_ConfirmationDialog.tscn" id="2_ovglx"]
-[ext_resource type="Script" uid="uid://bt5pidemhw2rf" path="res://scenes/PauseMenu/history_log_container.gd" id="3_f5w72"]
+[ext_resource type="Script" uid="uid://cfg1y1ygdri27" path="res://scenes/PauseMenu/history_log_container.gd" id="3_f5w72"]
 [ext_resource type="PackedScene" uid="uid://c2lv8pxfcnayg" path="res://scenes/PauseMenu/history_log.tscn" id="4_8bpk1"]
 [ext_resource type="PackedScene" uid="uid://djnvp4x64ukay" path="res://scenes/OptionsMenu/OptionsContainer.tscn" id="4_pyl8d"]
 [ext_resource type="PackedScene" uid="uid://cy4anjja2feca" path="res://scenes/RGT_Dialogs/RGT_YesNoDialog.tscn" id="4_rf7yh"]
@@ -204,4 +204,5 @@ unique_name_in_owner = true
 [connection signal="pressed" from="BoxContainer/MenuContainer/VBoxContainer/MenuButtons/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="BoxContainer/MenuContainer/VBoxContainer/MenuButtons/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="BoxContainer/TabContainer/OptionsContainer/VBoxContainer/MarginContainer2/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="visibility_changed" from="BoxContainer/TabContainer/HistoryScrollContainer/HistoryLogContainer" to="BoxContainer/TabContainer/HistoryScrollContainer/HistoryLogContainer" method="_on_visibility_changed"]
 [connection signal="confirmed" from="AcceptDialog" to="." method="_on_accept_dialog_confirmed"]
