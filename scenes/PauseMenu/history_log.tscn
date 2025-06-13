@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2lv8pxfcnayg"]
+[gd_scene load_steps=14 format=3 uid="uid://c2lv8pxfcnayg"]
 
 [ext_resource type="Script" uid="uid://xbsuakcyg2q2" path="res://scenes/PauseMenu/history_log.gd" id="1_op6go"]
 [ext_resource type="FontFile" uid="uid://bbfeoo2kuf30n" path="res://addons/icons-fonts/icons_fonts/MaterialIcons/material_design_icons.ttf" id="1_yx0pc"]
@@ -8,6 +8,8 @@
 [ext_resource type="Resource" uid="uid://6ioam3qiqsqa" path="res://addons/visualnovelkit/default_markups/def_markdown.tres" id="3_yx0pc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xgq2h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_op6go"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pv8bc"]
 font = ExtResource("1_yx0pc")
@@ -28,14 +30,49 @@ shadow_color = Color(1, 1, 1, 1)
 shadow_size = 0
 shadow_offset = Vector2(0, 0)
 
-[node name="HistoryLog" type="PanelContainer" node_paths=PackedStringArray("icon", "answer_label", "character_name_label", "dialogue_label")]
+[sub_resource type="Resource" id="Resource_op6go"]
+script = ExtResource("3_wm0r8")
+icon_font = "MaterialIcons"
+icon_name = "chat-question"
+icon_size = 32
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+metadata/_custom_type_script = "uid://diswvoymuh7fq"
+
+[sub_resource type="Resource" id="Resource_wm0r8"]
+script = ExtResource("3_wm0r8")
+icon_font = "MaterialIcons"
+icon_name = "menu"
+icon_size = 32
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_pv8bc"]
+script = ExtResource("3_wm0r8")
+icon_font = "MaterialIcons"
+icon_name = "alert"
+icon_size = 32
+icon_color = Color(1, 1, 1, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[node name="HistoryLog" type="PanelContainer" node_paths=PackedStringArray("character_name_label", "dialogue_label")]
 self_modulate = Color(1, 1, 1, 0.5)
 offset_right = 1280.0
 offset_bottom = 85.0
 size_flags_horizontal = 3
 script = ExtResource("1_op6go")
-icon = NodePath("VBoxContainer/HBoxContainer/FontIcon")
-answer_label = NodePath("VBoxContainer/AnwserLabel")
 character_name_label = NodePath("VBoxContainer/HBoxContainer/SpeakerLabel")
 dialogue_label = NodePath("VBoxContainer/DialogueLabel")
 disabled = true
@@ -51,13 +88,57 @@ layout_mode = 2
 theme_override_constants/separation = 5
 theme_override_styles/separator = SubResource("StyleBoxEmpty_xgq2h")
 
-[node name="FontIcon" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_op6go")
+current_tab = 0
+clip_tabs = false
+tabs_visible = false
+
+[node name="SayIcon" type="Label" parent="VBoxContainer/HBoxContainer/TabContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "󰭹"
 label_settings = SubResource("LabelSettings_pv8bc")
 script = ExtResource("2_op6go")
 icon_settings = SubResource("Resource_73hfd")
 metadata/_custom_type_script = "uid://sfoyl3fbn8so"
+metadata/_tab_index = 0
+
+[node name="AskIcon" type="Label" parent="VBoxContainer/HBoxContainer/TabContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "󱜸"
+label_settings = SubResource("LabelSettings_pv8bc")
+script = ExtResource("2_op6go")
+icon_settings = SubResource("Resource_op6go")
+metadata/_custom_type_script = "uid://sfoyl3fbn8so"
+metadata/_tab_index = 1
+
+[node name="MenuIcon" type="Label" parent="VBoxContainer/HBoxContainer/TabContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "󰍜"
+label_settings = SubResource("LabelSettings_pv8bc")
+script = ExtResource("2_op6go")
+icon_settings = SubResource("Resource_wm0r8")
+metadata/_custom_type_script = "uid://sfoyl3fbn8so"
+metadata/_tab_index = 2
+
+[node name="NotifyIcon" type="Label" parent="VBoxContainer/HBoxContainer/TabContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "󰀦"
+label_settings = SubResource("LabelSettings_pv8bc")
+script = ExtResource("2_op6go")
+icon_settings = SubResource("Resource_pv8bc")
+metadata/_custom_type_script = "uid://sfoyl3fbn8so"
+metadata/_tab_index = 3
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -65,6 +146,7 @@ theme_override_constants/separation = 5
 theme_override_styles/separator = SubResource("StyleBoxEmpty_xgq2h")
 
 [node name="SpeakerLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 clip_contents = false
 custom_minimum_size = Vector2(30, 40)
 layout_mode = 2
@@ -85,6 +167,7 @@ theme_override_constants/separation = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_xgq2h")
 
 [node name="DialogueLabel" type="RichTextLabel" parent="VBoxContainer"]
+unique_name_in_owner = true
 clip_contents = false
 custom_minimum_size = Vector2(16, 30)
 layout_mode = 2
@@ -106,7 +189,8 @@ layout_mode = 2
 theme_override_constants/separation = 5
 theme_override_styles/separator = SubResource("StyleBoxEmpty_xgq2h")
 
-[node name="AnwserLabel" type="RichTextLabel" parent="VBoxContainer"]
+[node name="AnswerLabel" type="RichTextLabel" parent="VBoxContainer"]
+unique_name_in_owner = true
 clip_contents = false
 custom_minimum_size = Vector2(16, 30)
 layout_mode = 2
