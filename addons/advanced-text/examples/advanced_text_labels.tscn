@@ -1,16 +1,16 @@
 [gd_scene load_steps=33 format=3 uid="uid://dw681hislg41h"]
 
 [ext_resource type="FontFile" uid="uid://dopnqhkanf1f7" path="res://addons/advanced-text/font/DejaVuSans.ttf" id="1_nhc5f"]
-[ext_resource type="Script" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="1_uinld"]
+[ext_resource type="Script" uid="uid://cgbqtpdgyaxq3" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="1_uinld"]
 [ext_resource type="FontFile" uid="uid://be1m3xik5j81c" path="res://addons/advanced-text/font/DejaVuSans-Bold.ttf" id="2_aml2b"]
 [ext_resource type="FontFile" uid="uid://dv5f7ykw422ft" path="res://addons/advanced-text/font/DejaVuSans-Oblique.ttf" id="3_7l8y2"]
 [ext_resource type="FontFile" uid="uid://3spkwr34s2bq" path="res://addons/advanced-text/font/DejaVuSans-BoldOblique.ttf" id="4_rc1wt"]
 [ext_resource type="FontFile" uid="uid://buj02o26lgfif" path="res://addons/advanced-text/font/DejaVuSansMono.ttf" id="5_fmnql"]
-[ext_resource type="Script" path="res://addons/advanced-text/parsers/MarkdownParser.gd" id="7_r0mph"]
-[ext_resource type="Script" path="res://addons/advanced-text/parsers/RenPyMarkupParser.gd" id="8_8yudh"]
-[ext_resource type="Script" path="res://addons/advanced-text/parsers/ExtendedBBCodeParser.gd" id="9_xqqk6"]
-[ext_resource type="Script" path="res://addons/rakugo-nodes/nodes/ButtonContainer.gd" id="10_ghujn"]
-[ext_resource type="Script" path="res://addons/advanced-text/examples/InitTestRakugoVars.gd" id="12_wngyp"]
+[ext_resource type="Script" uid="uid://dpoos1ol2em05" path="res://addons/advanced-text/parsers/MarkdownParser.gd" id="7_r0mph"]
+[ext_resource type="Script" uid="uid://dgqovpyyxqwb3" path="res://addons/advanced-text/parsers/RenPyMarkupParser.gd" id="8_8yudh"]
+[ext_resource type="Script" uid="uid://bnyoqsv4amdy0" path="res://addons/advanced-text/parsers/ExtendedBBCodeParser.gd" id="9_xqqk6"]
+[ext_resource type="Script" uid="uid://dqb2gd2uhk4n7" path="res://addons/rakugo-nodes/nodes/ButtonContainer.gd" id="10_ghujn"]
+[ext_resource type="Script" uid="uid://bla00yom1iti6" path="res://addons/advanced-text/examples/InitTestRakugoVars.gd" id="12_wngyp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0sox2"]
 font_size = 22
@@ -86,7 +86,7 @@ bold = "**"
 points = "-"
 headers = Array[LabelSettings]([SubResource("LabelSettings_mqb2n"), SubResource("LabelSettings_c8yh7"), SubResource("LabelSettings_faw0r"), SubResource("LabelSettings_n4lgb")])
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vyvh7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpwp7"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -104,9 +104,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 2
 
 [node name="MarkdownLabel" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
@@ -277,7 +278,6 @@ parser = SubResource("Resource_1176o")
 metadata/_tab_index = 1
 
 [node name="ExBBCodeLabel" type="RichTextLabel" parent="."]
-visible = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_nhc5f")
 theme_override_fonts/mono_font = ExtResource("5_fmnql")
@@ -413,7 +413,7 @@ parser = SubResource("Resource_uxkq8")
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_vyvh7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fpwp7")
 script = ExtResource("10_ghujn")
 
 [node name="MarginContainer" type="MarginContainer" parent="AdvancedTextButton/VBoxContainer/ButtonContainer"]
