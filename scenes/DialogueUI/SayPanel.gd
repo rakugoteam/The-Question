@@ -7,10 +7,11 @@ extends DialoguePanel
 func _ready():
 	super._ready()
 	if Engine.is_editor_hint(): return
-	Rakugo.sg_say.connect(set_labels)
+	Rakugo.sg_say.connect(_on_say)
 	if next_btn: next_btn.pressed.connect(_on_next_btn_pressed)
 
 func _on_say(character: Dictionary, text: String):
+	VisualNovelKit.add_history_log(["say", character, text])
 	set_labels(character, text)
 	show()
 

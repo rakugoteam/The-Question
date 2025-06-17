@@ -1,24 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c6k5nnpbypshi"]
+[gd_scene load_steps=7 format=3 uid="uid://c6k5nnpbypshi"]
 
 [ext_resource type="Script" uid="uid://2cvjfseljf2o" path="res://scenes/MainMenu/MainMenu.gd" id="1"]
-[ext_resource type="Theme" uid="uid://bubl284qwoqf8" path="res://the_question_theme.tres" id="1_7j8ul"]
 [ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://scenes/Credits/Credits.tscn" id="3_5dhvp"]
 [ext_resource type="Texture2D" uid="uid://bo6v222eqei2e" path="res://the_question-og/gui/main_menu.png" id="3_r8q81"]
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/rakugo_game_template/MusicPlayers/BackgroundMusicPlayer.tscn" id="4_w8sbm"]
 [ext_resource type="PackedScene" uid="uid://choevp6ilq78t" path="res://scenes/LoadSaveMenu/loadSaveMenu.tscn" id="5_mfpq2"]
 [ext_resource type="PackedScene" uid="uid://djnvp4x64ukay" path="res://scenes/OptionsMenu/OptionsContainer.tscn" id="6_ky335"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_7j8ul"]
-font_size = 40
-font_color = Color(0.874356, 0.11463, 0.407597, 1)
-outline_size = 8
-outline_color = Color(0.0338533, 0.0338533, 0.0338533, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_0qq82"]
-font_size = 20
-font_color = Color(0.874356, 0.11463, 0.407597, 1)
-outline_size = 8
-outline_color = Color(0.0338533, 0.0338533, 0.0338533, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -27,7 +14,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_7j8ul")
 script = ExtResource("1")
 
 [node name="BackgroundMusicPlayer" parent="." instance=ExtResource("4_w8sbm")]
@@ -82,16 +68,14 @@ layout_mode = 2
 [node name="Game_Title" type="Label" parent="VBoxContainer/HeaderMargin/TitlesContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "The Question"
-label_settings = SubResource("LabelSettings_7j8ul")
+text = "Game Title"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Game_SubTitle" type="Label" parent="VBoxContainer/HeaderMargin/TitlesContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Rakugo Port"
-label_settings = SubResource("LabelSettings_0qq82")
+text = "Game Subtitle"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -119,41 +103,35 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 text = "Continue"
-flat = true
 alignment = 0
 
 [node name="PlayButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Play"
-flat = true
 alignment = 0
 
 [node name="LoadButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Load"
-flat = true
 alignment = 0
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
 layout_mode = 2
 text = "Options
 "
-flat = true
 alignment = 0
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
 layout_mode = 2
 text = "Credits"
-flat = true
 alignment = 0
 
 [node name="ExitButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/MenuButtons"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Exit"
-flat = true
 alignment = 0
 
 [node name="CreditsContainer" parent="VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("3_5dhvp")]

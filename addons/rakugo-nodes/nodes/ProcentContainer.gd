@@ -6,10 +6,13 @@ extends Control
 ## Node that which size will be used as 100 procent
 @export var root: Control = null
 
+@export var disabled := false
+
 ## Set it from 1 to 100
 ## It changing this works only in Editor
 @export var procent_size := Vector2(100, 100):
 	set(value):
+		if disabled: return
 		if !is_node_ready(): await ready
 		if !Engine.is_editor_hint(): return
 		

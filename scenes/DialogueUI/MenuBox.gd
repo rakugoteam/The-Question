@@ -5,6 +5,7 @@ extends VBoxContainer
 @export var choice_btn_scene: PackedScene
 
 var markup: TextParser
+var _choices: Array
 
 signal menu_ready
 signal menu_clean
@@ -21,6 +22,7 @@ func _on_visibility_changed():
 	set_process_input(visible)
 
 func _on_menu(choices: Array):
+	_choices = choices
 	for id in choices.size():
 		var choice_btn := choice_btn_scene.instantiate()
 		add_child(choice_btn)
@@ -45,6 +47,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_choice(id: int):
 	Rakugo.menu_return(id)
+	VisualNovelKit.add_history_log(["menu", _choices[id]])
 	hide()
 	for ch in get_children(): ch.queue_free()
 	menu_clean.emit()

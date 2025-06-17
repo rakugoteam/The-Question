@@ -51,6 +51,7 @@ layout_mode = 2
 root = NodePath("../../..")
 
 [node name="SayPanel" parent="VBoxContainer" node_paths=PackedStringArray("root") instance=ExtResource("4_2fi1k")]
+custom_minimum_size = Vector2(1280, 180)
 layout_mode = 2
 root = NodePath("../..")
 procent_size = Vector2(100, 25)

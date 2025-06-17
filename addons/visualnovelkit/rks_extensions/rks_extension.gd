@@ -1,10 +1,10 @@
 extends Node
 class_name RKSExtension
 
-const err_mess_01 := "%s stament is missing any node name from `%s` group"
+const err_mess_01 := "%s statement is missing any node name from `%s` group"
 const err_mess_02 := "no node called %s is in %s group"
-const err_mess_03 := "node %s in %s group dosen't have method %s"
-const err_mess_04 := "statment %s must be after %s statement"
+const err_mess_03 := "node %s in %s group doesn't have method %s"
+const err_mess_04 := "statement %s must be after %s statement"
 
 var group_name: StringName:
 	get: return _group_name()
@@ -46,7 +46,6 @@ func rk_get_node(rk_node_name: String) -> Node:
 	
 	push_error(err_mess_02 % [rk_node_name, group_name])
 	return null
-
 
 func try_call_method(node: Node, method: String, err_mess := "") -> void:
 	if node.has_method(method):
