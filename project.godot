@@ -8,14 +8,6 @@
 
 config_version=5
 
-[addons]
-
-rakugo/game_version="1.0.0"
-rakugo/history_length=30
-rakugo/narrator/name="narrator"
-rakugo/debug=false
-rakugo/save_folder="user://saves"
-
 [application]
 
 config/name="The Question"
@@ -33,6 +25,10 @@ addons/visual_novel_kit/at_predefind/left=25.0
 addons/visual_novel_kit/at_predefind/right=75.0
 addons/visual_novel_kit/at_predefind/top=25.0
 addons/visual_novel_kit/at_predefind/bottom=75.0
+addons/rakugo/game_version=1.0
+addons/rakugo/narrator_name="narrator"
+addons/rakugo/debug=false
+addons/rakugo/save_folder="user://saves"
 
 [autoload]
 
@@ -60,7 +56,7 @@ script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "rk")
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Rakugo/plugin.cfg", "res://addons/advanced-text/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/icons-fonts/plugin.cfg", "res://addons/rakugo-nodes/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg", "res://addons/rakugo_regex_lab/plugin.cfg", "res://addons/visualnovelkit/plugin.cfg")
+enabled=PackedStringArray("res://addons/RakuScript_Color/plugin.cfg", "res://addons/Rakugo/plugin.cfg", "res://addons/advanced-text/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/icons-fonts/plugin.cfg", "res://addons/rakugo-nodes/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg", "res://addons/rakugo_regex_lab/plugin.cfg", "res://addons/visualnovelkit/plugin.cfg")
 
 [gui]
 
