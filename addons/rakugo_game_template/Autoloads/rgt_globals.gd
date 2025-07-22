@@ -7,6 +7,8 @@ const loading_scene_setting_path = rakugo_game_template_setting_path + "/loading
 const main_menu_setting_path = rakugo_game_template_setting_path + "/main_menu_path"
 const first_game_scene_setting_path = rakugo_game_template_setting_path + "/first_game_scene_path"
 
+static var game: Game
+
 static var rakugo_game_template_setting: String:
 	set(value):
 		ProjectSettings.set_setting(

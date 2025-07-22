@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2bvsm4v4rqbh"
-path="res://.godot/imported/Icon-goggly-eyes.svg-aee6958f944eb1a8c781bb2d9ff04b5a.ctex"
+uid="uid://bxwnla67st17g"
+path="res://.godot/imported/Script.svg-dea73637e445b8402f317284b40db4b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/Rakugo/icons/Icon-goggly-eyes.svg"
-dest_files=["res://.godot/imported/Icon-goggly-eyes.svg-aee6958f944eb1a8c781bb2d9ff04b5a.ctex"]
+source_file="res://addons/Rakugo/icons/Script.svg"
+dest_files=["res://.godot/imported/Script.svg-dea73637e445b8402f317284b40db4b3.ctex"]
 
 [params]
 

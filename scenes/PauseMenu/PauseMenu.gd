@@ -20,11 +20,6 @@ enum After_Save {do_nothing, quit, go_back_to_main_menu}
 
 var after_save := After_Save.do_nothing
 
-func _process(_delta):
-	if visible and Input.is_action_just_pressed("ui_cancel"):
-		tab_container.visible = false
-		_on_resume_button_pressed()
-
 func _ready():
 	if OS.has_feature("web"): %ExitButton.hide()
 
@@ -34,9 +29,7 @@ func _ready():
 	set_process(false)
 
 func _on_resume_button_pressed():
-	hide()
-	set_process(false)
-	get_tree().paused = false
+	RGT_Globals.game.hide_pause_menu()
 
 func _on_restart_button_pressed():
 	confirm_dialog.dialog_text = confirm_restart
