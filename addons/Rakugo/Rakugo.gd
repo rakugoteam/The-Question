@@ -45,6 +45,7 @@ signal sg_character_variable_changed(character_tag, var_name, value)
 
 ## Replaces <var_name> in given text with its value
 func replace_variables(text: String) -> String:
+	if !executer: return text
 	var sub_results = executer.regex_cache["VARIABLE_IN_STR"].search_all(text)
 	
 	for sub_result in sub_results:
@@ -325,6 +326,7 @@ func _exit_tree() -> void:
 # Todo Handle Error
 ## Add new custom instruction to RkScript.
 func add_custom_regex(key: String, regex: String):
+	if !mutex: return
 	mutex.lock()
 	parser.add_regex_at_runtime(key, regex)
 	mutex.unlock()
