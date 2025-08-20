@@ -1,0 +1,162 @@
+[gd_scene load_steps=16 format=3 uid="uid://bdw1wg7t60csg"]
+
+[ext_resource type="Script" uid="uid://dqb2gd2uhk4n7" path="res://addons/rakugo-nodes/nodes/ButtonContainer.gd" id="1_vg8rx"]
+[ext_resource type="Script" uid="uid://vhc7ipgmfu21" path="res://scenes/LoadSaveMenu/SaveSlot.gd" id="1_xotb7"]
+[ext_resource type="Script" uid="uid://cgbqtpdgyaxq3" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="2_xotb7"]
+[ext_resource type="Resource" uid="uid://6ioam3qiqsqa" path="res://addons/visualnovelkit/default_markups/def_markdown.tres" id="3_67nf4"]
+[ext_resource type="Script" uid="uid://pwyh8365is28" path="res://addons/icons-fonts/nodes/FontIconButton.gd" id="4_jpqxr"]
+[ext_resource type="Script" uid="uid://diswvoymuh7fq" path="res://addons/icons-fonts/resources/FontIconSetting.gd" id="5_jgcao"]
+[ext_resource type="FontFile" uid="uid://dopnqhkanf1f7" path="res://addons/advanced-text/font/DejaVuSans.ttf" id="6_ug45i"]
+[ext_resource type="FontFile" uid="uid://buj02o26lgfif" path="res://addons/advanced-text/font/DejaVuSansMono.ttf" id="7_8s0hs"]
+[ext_resource type="FontFile" uid="uid://dv5f7ykw422ft" path="res://addons/advanced-text/font/DejaVuSans-Oblique.ttf" id="8_hhbqm"]
+[ext_resource type="FontFile" uid="uid://3spkwr34s2bq" path="res://addons/advanced-text/font/DejaVuSans-BoldOblique.ttf" id="9_ewbhv"]
+[ext_resource type="FontFile" uid="uid://be1m3xik5j81c" path="res://addons/advanced-text/font/DejaVuSans-Bold.ttf" id="10_k75rm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xotb7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Resource" id="Resource_xotb7"]
+script = ExtResource("5_jgcao")
+icon_font = "MaterialIcons"
+icon_name = "content-save-edit"
+icon_size = 64
+icon_color = Color(1, 0.458824, 0, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fq7st"]
+
+[sub_resource type="Resource" id="Resource_64imm"]
+script = ExtResource("5_jgcao")
+icon_font = "MaterialIcons"
+icon_name = "delete-forever"
+icon_size = 64
+icon_color = Color(1, 0, 0, 1)
+outline_color = Color(1, 1, 1, 1)
+outline_size = 0
+shadow_color = Color(1, 1, 1, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[node name="SaveSlot" type="Panel"]
+custom_minimum_size = Vector2(0, 200)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+script = ExtResource("1_xotb7")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 1
+clip_tabs = false
+tabs_visible = false
+
+[node name="ExistingSave" type="BoxContainer" parent="TabContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="ButtonContainer" type="PanelContainer" parent="TabContainer/ExistingSave"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_xotb7")
+script = ExtResource("1_vg8rx")
+metadata/_custom_type_script = "uid://dqb2gd2uhk4n7"
+
+[node name="BoxContainer" type="BoxContainer" parent="TabContainer/ExistingSave/ButtonContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/ExistingSave/ButtonContainer/BoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="SaveData" type="RichTextLabel" parent="TabContainer/ExistingSave/ButtonContainer/BoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_xotb7")
+advanced_text = "# Save Number/Name
+## Save.Date
+### Other data
+"
+parser = ExtResource("3_67nf4")
+metadata/_custom_type_script = "uid://cgbqtpdgyaxq3"
+
+[node name="OverrideButton" type="PanelContainer" parent="TabContainer/ExistingSave"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xotb7")
+script = ExtResource("4_jpqxr")
+layout_order = "Icon"
+icon_settings = SubResource("Resource_xotb7")
+label_settings = SubResource("LabelSettings_fq7st")
+metadata/_custom_type_script = "uid://pwyh8365is28"
+
+[node name="DeleteButton" type="PanelContainer" parent="TabContainer/ExistingSave"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xotb7")
+script = ExtResource("4_jpqxr")
+layout_order = "Icon"
+icon_settings = SubResource("Resource_64imm")
+label_settings = SubResource("LabelSettings_fq7st")
+metadata/_custom_type_script = "uid://pwyh8365is28"
+
+[node name="NewSave" type="PanelContainer" parent="TabContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_xotb7")
+script = ExtResource("1_vg8rx")
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/NewSave"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="MarkdownLabel" type="RichTextLabel" parent="TabContainer/NewSave/MarginContainer"]
+modulate = Color(0, 0.653035, 0.0201425, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("6_ug45i")
+theme_override_fonts/mono_font = ExtResource("7_8s0hs")
+theme_override_fonts/italics_font = ExtResource("8_hhbqm")
+theme_override_fonts/bold_italics_font = ExtResource("9_ewbhv")
+theme_override_fonts/bold_font = ExtResource("10_k75rm")
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("2_xotb7")
+advanced_text = "# **New Save** [mi:content-save-plus, 48]
+
+"
+parser = ExtResource("3_67nf4")
