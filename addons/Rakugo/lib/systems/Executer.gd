@@ -30,7 +30,7 @@ func _init():
 	else:
 		push_error("execturer, VARIABLE_IN_STR compilation failed")
 
-func get_current_thread_datas() -> Dictionary:
+func get_current_thread_data() -> Dictionary:
 	if current_thread:
 		var dico = threads[current_thread.get_id()]
 

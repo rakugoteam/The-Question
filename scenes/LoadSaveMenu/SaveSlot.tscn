@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://bdw1wg7t60csg"]
 
 [ext_resource type="Script" uid="uid://dqb2gd2uhk4n7" path="res://addons/rakugo-nodes/nodes/ButtonContainer.gd" id="1_vg8rx"]
-[ext_resource type="Script" uid="uid://vhc7ipgmfu21" path="res://scenes/LoadSaveMenu/SaveSlot.gd" id="1_xotb7"]
+[ext_resource type="Script" uid="uid://buups43q802jm" path="res://scenes/LoadSaveMenu/SaveSlot.gd" id="1_xotb7"]
 [ext_resource type="Script" uid="uid://cgbqtpdgyaxq3" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="2_xotb7"]
 [ext_resource type="Resource" uid="uid://6ioam3qiqsqa" path="res://addons/visualnovelkit/default_markups/def_markdown.tres" id="3_67nf4"]
 [ext_resource type="Script" uid="uid://pwyh8365is28" path="res://addons/icons-fonts/nodes/FontIconButton.gd" id="4_jpqxr"]
