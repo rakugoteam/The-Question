@@ -25,7 +25,7 @@ var waiting_ask_return := false: get = is_waiting_ask_return
 var waiting_menu_return := false: get = is_waiting_menu_return
 
 # when you load game to run last script
-var last_thread_datas: Dictionary
+var last_thread_data: Dictionary
 
 @onready var store_manager := StoreManager.new()
 @onready var parser := Parser.new()
@@ -45,6 +45,7 @@ signal sg_character_variable_changed(character_tag, var_name, value)
 
 ## Replaces <var_name> in given text with its value
 func replace_variables(text: String) -> String:
+	if !executer: return text
 	var sub_results = executer.regex_cache["VARIABLE_IN_STR"].search_all(text)
 	
 	for sub_result in sub_results:
@@ -227,27 +228,30 @@ func _ready():
 	var narrator_name = ProjectSettings.get_setting(narrator_name)
 	define_character("narrator", narrator_name)
 
-## Save all variables, characters, script_name and last line readed on last executed script, in user://save/save_name/save.json file.
-func save_game(save_name: String = "quick"):
+## Returns data for saving: all variables, characters,
+## script_name and last line read on last executed script
+func get_save_data() -> Dictionary:
 	mutex.lock()
-	store_manager.save_game(executer.get_current_thread_datas(), save_name)
+	var data := store_manager.get_save_data(executer.get_current_thread_data())
 	mutex.unlock()
+	return data
 
-## Load all variables, characters, script_name and last line readed on last executed script, from user://save/save_name/save.json file if existed.
-func load_game(save_name := "quick"):
-	last_thread_datas = store_manager.load_game(save_name)
-	parse_script(last_thread_datas["path"])
+## Load all variables, characters, script_name
+## and last line read on last executed script, from given save data
+func load_game(save_data: Dictionary):
+	last_thread_data = store_manager.load_save_data(save_data)
+	parse_script(last_thread_data["path"])
 	sg_game_loaded.emit()
 
-## Execute the loaded script from last line readed.
+## Execute the loaded script from last line read.
 func resume_loaded_script() -> int:
-	var last_thread_datas_tmp = last_thread_datas
+	var last_thread_data_tmp = last_thread_data
 
-	if last_thread_datas.is_empty():
+	if last_thread_data.is_empty():
 		push_error("Rakugo does not have script to reload")
 		return FAILED
 	
-	return execute_script(last_thread_datas["file_base_name"], "", last_thread_datas["last_index"])
+	return execute_script(last_thread_data["file_base_name"], "", last_thread_data["last_index"])
 
 ## Parser
 ## Parse a script and store it. You can execute it with execute_script.
@@ -266,9 +270,7 @@ func parse_script(file_name: String) -> int:
 		return FAILED
 		
 	parsed_script["path"] = file_name
-	
 	store_manager.parsed_scripts[file_name.get_file().get_basename()] = parsed_script
-	
 	mutex.unlock()
 	return OK
 
@@ -325,6 +327,7 @@ func _exit_tree() -> void:
 # Todo Handle Error
 ## Add new custom instruction to RkScript.
 func add_custom_regex(key: String, regex: String):
+	if !mutex: return
 	mutex.lock()
 	parser.add_regex_at_runtime(key, regex)
 	mutex.unlock()
@@ -375,12 +378,10 @@ func emit_sg_ask(character: Dictionary, question: String, default_answer: String
 func ask(variable_name: String, character_tag: String, question: String, default_answer: String):
 	mutex.lock()
 	waiting_ask_return = true
-
 	variable_ask_name = variable_name
 	mutex.unlock()
 	
 	var character = get_character(character_tag)
-	
 	call_thread_safe("emit_sg_ask", character, question, default_answer)
 
 ## Returns true when Rakugo waiting call of ask_return.
@@ -421,11 +422,9 @@ func menu(choices: PackedStringArray):
 ## Returns true when Rakugo waiting call of menu_return.
 func is_waiting_menu_return():
 	var waiting_menu_return_value = false
-
 	mutex.lock()
 	waiting_menu_return_value = waiting_menu_return
 	mutex.unlock()
-
 	return waiting_menu_return_value
 
 ## Use it when is_waiting_menu_return return true, to continue script reading process.
@@ -433,8 +432,6 @@ func is_waiting_menu_return():
 func menu_return(index: int):
 	mutex.lock()
 	waiting_menu_return = false
-	
 	executer.menu_jump_index = index
-
 	executer.current_semaphore.post()
 	mutex.unlock()

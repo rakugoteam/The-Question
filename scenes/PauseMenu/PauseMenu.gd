@@ -15,6 +15,7 @@ const confirm_quit = "Do you want to save before quit the Game ?"
 @onready var tab_container: TabContainer = $BoxContainer/TabContainer
 @onready var options_container: MarginContainer = %OptionsContainer
 @onready var history_scroll_container: ScrollContainer = %HistoryScrollContainer
+@onready var load_save_menu = %LoadSaveMenu
 
 enum After_Save {do_nothing, quit, go_back_to_main_menu}
 
@@ -62,9 +63,8 @@ func return_to_main_menu():
 
 func _on_confirm_exit_confirmed():
 	after_save = After_Save.quit
-	
 	_on_save_button_pressed()
-	
+
 func quit():
 	get_tree().quit()
 
@@ -118,7 +118,11 @@ func _on_options_button_toggled(toggled_on: bool) -> void:
 	options_container.visible = toggled_on
 
 func _on_load_button_toggled(toggled_on: bool) -> void:
-	pass # Replace with function body.
+	tab_container.visible = toggled_on
+	# load_save_menu.mode = "load" 
+	load_save_menu.visible = toggled_on
 
 func _on_save_button_toggled(toggled_on: bool) -> void:
-	pass # Replace with function body.
+	tab_container.visible = toggled_on
+	# load_save_menu.mode = "save"
+	load_save_menu.visible = toggled_on

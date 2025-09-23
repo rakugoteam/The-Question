@@ -28,5 +28,3 @@ func _exit_tree():
 	]
 	for setting in settings:
 		ProjectSettings.set_setting(setting, null)
-
-

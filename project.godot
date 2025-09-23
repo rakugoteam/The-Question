@@ -19,16 +19,16 @@ addons/rakugo_game_template/loading_scene_path="res://scenes/LoadingScreen/Loadi
 addons/rakugo_game_template/main_menu_path="res://scenes/MainMenu/MainMenu.tscn"
 addons/rakugo_game_template/first_game_scene_path="res://scenes/Game/game.tscn"
 addons/icon_finder/preview_size=24
+addons/rakugo/game_version=1.0
+addons/rakugo/narrator_name="narrator"
+addons/rakugo/debug=false
+addons/rakugo/save_folder="user://saves"
 addons/visual_novel_kit/default_markup_setting="res://addons/visualnovelkit/default_markups/def_markdown.tres"
 addons/visual_novel_kit/at_predefind/center=Vector2(50, 50)
 addons/visual_novel_kit/at_predefind/left=25.0
 addons/visual_novel_kit/at_predefind/right=75.0
 addons/visual_novel_kit/at_predefind/top=25.0
 addons/visual_novel_kit/at_predefind/bottom=75.0
-addons/rakugo/game_version=1.0
-addons/rakugo/narrator_name="narrator"
-addons/rakugo/debug=false
-addons/rakugo/save_folder="user://saves"
 
 [autoload]
 
@@ -56,7 +56,7 @@ script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "rk")
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/RakuScript_Color/plugin.cfg", "res://addons/Rakugo/plugin.cfg", "res://addons/advanced-text/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/icons-fonts/plugin.cfg", "res://addons/rakugo-nodes/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg", "res://addons/rakugo_regex_lab/plugin.cfg", "res://addons/visualnovelkit/plugin.cfg")
+enabled=PackedStringArray("res://addons/RakuScript_Color/plugin.cfg", "res://addons/Rakugo/plugin.cfg", "res://addons/advanced-text/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/icons-fonts/plugin.cfg", "res://addons/rakugo-nodes/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg", "res://addons/visualnovelkit/plugin.cfg")
 
 [gui]
 

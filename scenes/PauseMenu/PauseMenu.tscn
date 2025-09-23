@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdwvtbtwmrqbn"]
+[gd_scene load_steps=9 format=3 uid="uid://cdwvtbtwmrqbn"]
 
 [ext_resource type="Script" uid="uid://dbxrmlo8ocuvk" path="res://scenes/PauseMenu/PauseMenu.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dnlyj8r7kuvas" path="res://scenes/RGT_Dialogs/RGT_ConfirmationDialog.tscn" id="2_ovglx"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c2lv8pxfcnayg" path="res://scenes/PauseMenu/history_log.tscn" id="4_8bpk1"]
 [ext_resource type="PackedScene" uid="uid://djnvp4x64ukay" path="res://scenes/OptionsMenu/OptionsContainer.tscn" id="4_pyl8d"]
 [ext_resource type="PackedScene" uid="uid://cy4anjja2feca" path="res://scenes/RGT_Dialogs/RGT_YesNoDialog.tscn" id="4_rf7yh"]
+[ext_resource type="PackedScene" uid="uid://choevp6ilq78t" path="res://scenes/LoadSaveMenu/loadSaveMenu.tscn" id="5_itqmq"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_8bpk1"]
 
@@ -138,9 +139,6 @@ theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 metadata/_tab_index = 0
 
-[node name="Panel" type="Panel" parent="BoxContainer/TabContainer/OptionsContainer"]
-layout_mode = 2
-
 [node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/TabContainer/OptionsContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -183,6 +181,12 @@ theme_override_constants/separation = 8
 script = ExtResource("3_f5w72")
 history_log_scene = ExtResource("4_8bpk1")
 scroll = NodePath("..")
+
+[node name="LoadSaveMenu" parent="BoxContainer/TabContainer" instance=ExtResource("5_itqmq")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="AcceptDialog" type="AcceptDialog" parent="."]
 unique_name_in_owner = true

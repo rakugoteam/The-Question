@@ -57,4 +57,3 @@ static var at_bottom : float:
 		ProjectSettings.set_setting(at_bottom_setting_path, value)
 	get:
 		return ProjectSettings.get_setting(at_bottom_setting_path)
-
