@@ -1,3 +1,0 @@
-character ts "Test"
-answer = ? ts "Are you human ?" "Yes"
-answer =? "Your answer was <answer> ?" "<answer>"

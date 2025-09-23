@@ -1,7 +1,0 @@
-"start"
-show Parent ChildA
-"step"
-rotate 45
-"step"
-hide Parent
-"end"
