@@ -1,6 +1,0 @@
-"Hello, world !"
-character sy "Sylvie"
-sy "Hello !"
-"My name is <sy.name>"
-years = 18
-"I am <years>"
