@@ -56,10 +56,11 @@ script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "rk")
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/RakuScript_Color/plugin.cfg", "res://addons/Rakugo/plugin.cfg", "res://addons/advanced-text/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/icons-fonts/plugin.cfg", "res://addons/rakugo-nodes/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg", "res://addons/visualnovelkit/plugin.cfg")
+enabled=PackedStringArray("res://addons/RakuScript_Color/plugin.cfg", "res://addons/Rakugo/plugin.cfg", "res://addons/advanced-text/plugin.cfg", "res://addons/icons-fonts/plugin.cfg", "res://addons/rakugo-nodes/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg", "res://addons/visualnovelkit/plugin.cfg")
 
 [gui]
 
+theme/custom="uid://bubl284qwoqf8"
 common/drop_mouse_on_gui_input_disabled=true
 
 [input]
