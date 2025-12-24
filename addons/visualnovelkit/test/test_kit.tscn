@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpo40rp5u1soi"]
+
+[ext_resource type="Script" uid="uid://d1fegtsffsy24" path="res://addons/Rakugo/lib/nodes/RakuScriptDialogue.gd" id="1_1jd60"]
+
+[node name="TestKit" type="Node"]
+script = ExtResource("1_1jd60")
+raku_script = "res://addons/visualnovelkit/test/test.rk"
+auto_start = true
+metadata/_custom_type_script = "uid://d1fegtsffsy24"

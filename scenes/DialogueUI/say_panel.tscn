@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ohgdminvqvtk"]
+[gd_scene load_steps=15 format=3 uid="uid://ohgdminvqvtk"]
 
 [ext_resource type="Script" uid="uid://ba71xtrq3au6m" path="res://scenes/DialogueUI/SayPanel.gd" id="1_sqegj"]
 [ext_resource type="Script" uid="uid://cgbqtpdgyaxq3" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="2_xgq2h"]
@@ -8,17 +8,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xgq2h"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpwp7"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oj5b0"]
 
 [sub_resource type="Resource" id="Resource_8dka6"]
 script = ExtResource("5_xk78c")
@@ -33,6 +23,26 @@ shadow_size = 0
 shadow_offset = Vector2(0, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_fpwp7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fpwp7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xk78c"]
+bg_color = Color(0.791426, 0.226939, 9.62615e-08, 1)
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.791426, 0.226939, 9.62615e-08, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ja8ui"]
+bg_color = Color(0.65098, 0, 0, 1)
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8dka6"]
+bg_color = Color(0.791426, 0.226939, 9.62615e-08, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ccg3"]
 
 [node name="SayPanel" type="PanelContainer" node_paths=PackedStringArray("next_btn", "character_name_label", "dialogue_label") groups=["show"]]
 self_modulate = Color(1, 1, 1, 0.5)
@@ -100,9 +110,14 @@ metadata/_custom_type_script = "uid://cgbqtpdgyaxq3"
 [node name="NextButton" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fpwp7")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oj5b0")
 script = ExtResource("4_fpwp7")
 layout_order = "Icon"
 icon_settings = SubResource("Resource_8dka6")
 label_settings = SubResource("LabelSettings_fpwp7")
+style_normal = SubResource("StyleBoxEmpty_fpwp7")
+style_focus = SubResource("StyleBoxFlat_xk78c")
+style_pressed = SubResource("StyleBoxFlat_ja8ui")
+style_hover = SubResource("StyleBoxFlat_8dka6")
+style_disabled = SubResource("StyleBoxFlat_7ccg3")
 metadata/_custom_type_script = "uid://pwyh8365is28"

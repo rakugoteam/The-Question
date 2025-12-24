@@ -4,10 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://cdwvtbtwmrqbn" path="res://scenes/PauseMenu/PauseMenu.tscn" id="2_hcope"]
 [ext_resource type="PackedScene" uid="uid://cp3p3kqcjh0me" path="res://scenes/EndMenu/EndMenu.tscn" id="3_yfekm"]
 [ext_resource type="PackedScene" uid="uid://cnsu6sfdku23l" path="res://scenes/DialogueUI/dialogue_ui.tscn" id="4_7dfdq"]
-[ext_resource type="PackedScene" uid="uid://du8wlrf3x8vc0" path="res://scenes/Game/main.tscn" id="5_54y65"]
+[ext_resource type="PackedScene" uid="uid://du8wlrf3x8vc0" path="res://scenes/Game/main.tscn" id="5_7dfdq"]
 
 [node name="Game" type="Node"]
-process_mode = 3
 script = ExtResource("1_o2piy")
 
 [node name="GUI" type="CanvasLayer" parent="."]
@@ -23,6 +22,6 @@ visible = false
 [node name="DialogueUI" parent="GUI" instance=ExtResource("4_7dfdq")]
 unique_name_in_owner = true
 
-[node name="Game" parent="." instance=ExtResource("5_54y65")]
+[node name="Game" parent="." instance=ExtResource("5_7dfdq")]
 
 [connection signal="ask_to_save" from="GUI/PauseMenu" to="." method="_on_pause_menu_ask_to_save"]

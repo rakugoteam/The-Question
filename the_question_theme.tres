@@ -1,12 +1,30 @@
-[gd_resource type="Theme" format=3 uid="uid://bubl284qwoqf8"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://bubl284qwoqf8"]
+
+[ext_resource type="Texture2D" uid="uid://cpau7jxw8bo3e" path="res://the_question-og/gui/button/hover_background.png" id="1_vis5i"]
+[ext_resource type="Texture2D" uid="uid://bodh84elgiyku" path="res://the_question-og/gui/slider/vertical_hover_thumb.png" id="2_ewl7h"]
+[ext_resource type="Texture2D" uid="uid://dexghfcjr15pm" path="res://the_question-og/gui/button/check_selected_foreground.png" id="3_m7l7k"]
+[ext_resource type="Texture2D" uid="uid://das7rgw0ljwbt" path="res://the_question-og/gui/phone/textbox.png" id="4_ewl7h"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bfo1e"]
+texture = ExtResource("1_vis5i")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yv4eq"]
+texture = ExtResource("2_ewl7h")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bung8"]
+texture = ExtResource("3_m7l7k")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oj5b0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m7l7k"]
+texture = ExtResource("4_ewl7h")
 
 [resource]
-Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/font_focus_color = Color(0.996078, 0.996078, 0.996078, 1)
-Button/colors/font_hover_color = Color(0.996078, 0.321569, 0.321569, 1)
-Button/colors/font_hover_pressed_color = Color(0.65098, 0, 0, 1)
-Button/colors/font_outline_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(0.996078, 0, 0, 1)
-Button/constants/outline_size = 8
-Button/font_sizes/font_size = 32
-Label/font_sizes/font_size = 32
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_hover_color = Color(0.791426, 0.226939, 9.62615e-08, 1)
+Button/colors/font_hover_pressed_color = Color(0.791426, 0.226939, 9.62615e-08, 1)
+Button/styles/hover = SubResource("StyleBoxTexture_bfo1e")
+Button/styles/hover_mirrored = SubResource("StyleBoxTexture_yv4eq")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_bung8")
+Button/styles/normal = SubResource("StyleBoxEmpty_oj5b0")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_m7l7k")

@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cahg2fobtnlcv"]
+[gd_scene load_steps=7 format=3 uid="uid://cahg2fobtnlcv"]
 
+[ext_resource type="Texture2D" uid="uid://bab77en74x8pm" path="res://the_question-og/gui/notify.png" id="1_lpuoc"]
 [ext_resource type="Script" uid="uid://7nyojh0i8r3l" path="res://scenes/DialogueUI/NotifyPanel.gd" id="1_vufgk"]
 [ext_resource type="Script" uid="uid://cgbqtpdgyaxq3" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="2_e2xjp"]
 [ext_resource type="Resource" uid="uid://6ioam3qiqsqa" path="res://addons/visualnovelkit/default_markups/def_markdown.tres" id="3_lpuoc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_565di"]
+texture = ExtResource("1_lpuoc")
 
 [sub_resource type="LabelSettings" id="LabelSettings_e2xjp"]
 
@@ -15,6 +19,7 @@ anchor_bottom = 0.082
 offset_left = -0.360046
 offset_bottom = -0.0400009
 grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_565di")
 script = ExtResource("1_vufgk")
 notification_label = NodePath("MarginContainer/AdvancedTextLabel")
 timer = NodePath("Timer")
