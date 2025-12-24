@@ -1,34 +1,50 @@
-[gd_scene load_steps=10 format=3 uid="uid://xc8pm4yro11u"]
+[gd_scene load_steps=16 format=3 uid="uid://xc8pm4yro11u"]
 
 [ext_resource type="Script" uid="uid://bisttr5ciqnoe" path="res://scenes/DialogueUI/choice_button.gd" id="1_t7yrp"]
 [ext_resource type="FontFile" uid="uid://dopnqhkanf1f7" path="res://addons/advanced-text/font/DejaVuSans.ttf" id="2_lfmik"]
 [ext_resource type="Resource" uid="uid://6ioam3qiqsqa" path="res://addons/visualnovelkit/default_markups/def_markdown.tres" id="2_t7yrp"]
 [ext_resource type="FontFile" uid="uid://buj02o26lgfif" path="res://addons/advanced-text/font/DejaVuSansMono.ttf" id="3_65k2t"]
+[ext_resource type="Texture2D" uid="uid://caqyyrks30thy" path="res://the_question-og/gui/textbox.png" id="3_lfmik"]
 [ext_resource type="FontFile" uid="uid://dv5f7ykw422ft" path="res://addons/advanced-text/font/DejaVuSans-Oblique.ttf" id="4_lw1ar"]
 [ext_resource type="FontFile" uid="uid://3spkwr34s2bq" path="res://addons/advanced-text/font/DejaVuSans-BoldOblique.ttf" id="5_8x65d"]
 [ext_resource type="FontFile" uid="uid://be1m3xik5j81c" path="res://addons/advanced-text/font/DejaVuSans-Bold.ttf" id="6_rdov7"]
 [ext_resource type="Script" uid="uid://cgbqtpdgyaxq3" path="res://addons/advanced-text/nodes/AdvancedTextLabel.gd" id="7_be8xk"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpwp7"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oj5b0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_65k2t"]
+texture = ExtResource("3_lfmik")
+modulate_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lw1ar"]
+texture = ExtResource("3_lfmik")
+modulate_color = Color(1, 0.39713, 0.219948, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8x65d"]
+texture = ExtResource("3_lfmik")
+modulate_color = Color(0.65098, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rdov7"]
+texture = ExtResource("3_lfmik")
+modulate_color = Color(0.791426, 0.226939, 9.62615e-08, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_be8xk"]
+texture = ExtResource("3_lfmik")
+modulate_color = Color(0.666569, 0.666569, 0.666569, 1)
 
 [node name="ChoiceButton" type="PanelContainer" node_paths=PackedStringArray("label")]
 custom_minimum_size = Vector2(100, 0)
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_fpwp7")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oj5b0")
 script = ExtResource("1_t7yrp")
 label = NodePath("MarginContainer/AdvancedTextLabel")
 parser = ExtResource("2_t7yrp")
 text = "@center{ @rainbow 0.2,10,20 {**Menu Button**} [mi:button-cursor] :smile: }"
+style_normal = SubResource("StyleBoxTexture_65k2t")
+style_focus = SubResource("StyleBoxTexture_lw1ar")
+style_pressed = SubResource("StyleBoxTexture_8x65d")
+style_hover = SubResource("StyleBoxTexture_rdov7")
+style_disabled = SubResource("StyleBoxTexture_be8xk")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

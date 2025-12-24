@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cd0jbh4metflb"]
+[gd_scene load_steps=5 format=3 uid="uid://cd0jbh4metflb"]
 
 [ext_resource type="Script" uid="uid://0yt51hpcbe8l" path="res://scenes/LoadingScreen/LoadingScreen.gd" id="1_gbk34"]
-[ext_resource type="Texture2D" uid="uid://bo6v222eqei2e" path="res://the_question-og/gui/main_menu.png" id="2_qwdnn"]
 
 [sub_resource type="Animation" id="Animation_xbk22"]
 resource_name = "Flash"
@@ -55,7 +54,6 @@ script = ExtResource("1_gbk34")
 
 [node name="MainMenu" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("2_qwdnn")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

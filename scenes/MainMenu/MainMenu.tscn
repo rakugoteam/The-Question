@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6k5nnpbypshi"]
+[gd_scene load_steps=10 format=3 uid="uid://c6k5nnpbypshi"]
 
 [ext_resource type="Script" uid="uid://2cvjfseljf2o" path="res://scenes/MainMenu/MainMenu.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://scenes/Credits/Credits.tscn" id="3_5dhvp"]
@@ -6,6 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/rakugo_game_template/MusicPlayers/BackgroundMusicPlayer.tscn" id="4_w8sbm"]
 [ext_resource type="PackedScene" uid="uid://choevp6ilq78t" path="res://scenes/LoadSaveMenu/loadSaveMenu.tscn" id="5_mfpq2"]
 [ext_resource type="PackedScene" uid="uid://djnvp4x64ukay" path="res://scenes/OptionsMenu/OptionsContainer.tscn" id="6_ky335"]
+[ext_resource type="Texture2D" uid="uid://0p65b5kx78jc" path="res://the_question-og/gui/overlay/main_menu.png" id="7_mqas3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r8q81"]
+font_size = 32
+font_color = Color(0.947344, 0.000579157, 0.000316893, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7j8ul"]
+font_size = 21
+font_color = Color(0.947344, 0.000579157, 0.000316893, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -28,6 +41,14 @@ grow_vertical = 2
 texture = ExtResource("3_r8q81")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="MainMenu" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1280.0
+grow_vertical = 2
+texture = ExtResource("7_mqas3")
 
 [node name="VersionNumber" type="Label" parent="."]
 unique_name_in_owner = true
@@ -58,25 +79,27 @@ grow_vertical = 2
 [node name="HeaderMargin" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_constants/margin_left = 64
+theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 64
 
 [node name="TitlesContainer" type="VBoxContainer" parent="VBoxContainer/HeaderMargin"]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 
 [node name="Game_Title" type="Label" parent="VBoxContainer/HeaderMargin/TitlesContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "Game Title"
-horizontal_alignment = 1
+text = "The Question"
+label_settings = SubResource("LabelSettings_r8q81")
 vertical_alignment = 1
 
 [node name="Game_SubTitle" type="Label" parent="VBoxContainer/HeaderMargin/TitlesContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Game Subtitle"
-horizontal_alignment = 1
+text = "Rakugo Port"
+label_settings = SubResource("LabelSettings_7j8ul")
 vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]

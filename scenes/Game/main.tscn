@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://pgp7r5an2h8c" path="res://scenes/Game/bgs.tscn" id="1_g7xkg"]
 [ext_resource type="PackedScene" uid="uid://de5coe3ghvxle" path="res://scenes/Game/Sylvie.tscn" id="2_r4rr0"]
-[ext_resource type="Script" uid="uid://bwrjtedo2bx6b" path="res://addons/Rakugo/lib/nodes/RakuScriptDialogue.gd" id="3_r4rr0"]
+[ext_resource type="Script" uid="uid://cx42bsu76xsw6" path="res://addons/Rakugo/lib/nodes/RakuScriptDialogue.gd" id="3_r4rr0"]
 
 [node name="Game" type="Node2D"]
 
