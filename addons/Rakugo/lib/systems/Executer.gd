@@ -1,6 +1,6 @@
 extends RefCounted
 
-const jump_error = "Executer::do_execute_jump, can not jump to unknow label : "
+const jump_error = "Executer::do_execute_jump, can not jump to unknown label : "
 
 var stop_thread := false
 
@@ -30,7 +30,7 @@ func _init():
 	else:
 		push_error("executer, VARIABLE_IN_STR compilation failed")
 
-func get_current_thread_datas() -> Dictionary:
+func get_current_thread_data() -> Dictionary:
 	if current_thread:
 		var dict = threads[current_thread.get_id()]
 

@@ -25,7 +25,7 @@ var waiting_ask_return := false: get = is_waiting_ask_return
 var waiting_menu_return := false: get = is_waiting_menu_return
 
 # when you load game to run last script
-var last_thread_datas: Dictionary
+var last_thread_data: Dictionary
 
 @onready var store_manager := StoreManager.new()
 @onready var parser := Parser.new()
@@ -230,24 +230,24 @@ func _ready():
 ## Save all variables, characters, script_name and last line read on last executed script, in user://save/save_name/save.json file.
 func save_game(save_name: String = "quick"):
 	mutex.lock()
-	store_manager.save_game(executer.get_current_thread_datas(), save_name)
+	store_manager.save_game(executer.get_current_thread_data(), save_name)
 	mutex.unlock()
 
 ## Load all variables, characters, script_name and last line read on last executed script, from user://save/save_name/save.json file if existed.
 func load_game(save_name := "quick"):
-	last_thread_datas = store_manager.load_game(save_name)
-	parse_script(last_thread_datas["path"])
+	last_thread_data = store_manager.load_game(save_name)
+	parse_script(last_thread_data["path"])
 	sg_game_loaded.emit()
 
 ## Execute the loaded script from last line read.
 func resume_loaded_script() -> int:
-	var last_thread_datas_tmp = last_thread_datas
+	var last_thread_data_tmp = last_thread_data
 
-	if last_thread_datas.is_empty():
+	if last_thread_data.is_empty():
 		push_error("Rakugo does not have script to reload")
 		return FAILED
 	
-	return execute_script(last_thread_datas["file_base_name"], "", last_thread_datas["last_index"])
+	return execute_script(last_thread_data["file_base_name"], "", last_thread_data["last_index"])
 
 ## Parser
 ## Parse a script and store it. You can execute it with execute_script.
