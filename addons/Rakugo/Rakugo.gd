@@ -227,19 +227,19 @@ func _ready():
 	var narrator_name = ProjectSettings.get_setting(narrator_name)
 	define_character("narrator", narrator_name)
 
-## Save all variables, characters, script_name and last line readed on last executed script, in user://save/save_name/save.json file.
+## Save all variables, characters, script_name and last line read on last executed script, in user://save/save_name/save.json file.
 func save_game(save_name: String = "quick"):
 	mutex.lock()
 	store_manager.save_game(executer.get_current_thread_datas(), save_name)
 	mutex.unlock()
 
-## Load all variables, characters, script_name and last line readed on last executed script, from user://save/save_name/save.json file if existed.
+## Load all variables, characters, script_name and last line read on last executed script, from user://save/save_name/save.json file if existed.
 func load_game(save_name := "quick"):
 	last_thread_datas = store_manager.load_game(save_name)
 	parse_script(last_thread_datas["path"])
 	sg_game_loaded.emit()
 
-## Execute the loaded script from last line readed.
+## Execute the loaded script from last line read.
 func resume_loaded_script() -> int:
 	var last_thread_datas_tmp = last_thread_datas
 
