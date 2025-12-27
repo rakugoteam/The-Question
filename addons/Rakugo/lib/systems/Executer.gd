@@ -28,22 +28,22 @@ func _init():
 	if reg.compile(regex["VARIABLE_IN_STR"]) == OK:
 		regex_cache["VARIABLE_IN_STR"] = reg
 	else:
-		push_error("execturer, VARIABLE_IN_STR compilation failed")
+		push_error("executer, VARIABLE_IN_STR compilation failed")
 
 func get_current_thread_datas() -> Dictionary:
 	if current_thread:
-		var dico = threads[current_thread.get_id()]
+		var dict = threads[current_thread.get_id()]
 
-		return {"file_base_name": dico["file_base_name"], "last_index": dico["last_index"]}
+		return {"file_base_name": dict["file_base_name"], "last_index": dict["last_index"]}
 
 	return {}
 
 func stop_current_thread() -> int:
 	if current_thread and current_thread.is_alive():
-		var dico = threads[current_thread.get_id()]
+		var dict = threads[current_thread.get_id()]
 		
-		dico["stop"] = true
-		dico["semaphore"].post()
+		dict["stop"] = true
+		dict["semaphore"].post()
 	return OK
 
 func execute_script(parsed_script: Dictionary, label_name: String = "", index: int = 0) -> int:
@@ -102,7 +102,7 @@ func do_execute_script(parameters: Dictionary):
 	
 	threads[thread.get_id()] = parameters
 	
-	var semephore = parameters["semaphore"]
+	var semaphore = parameters["semaphore"]
 	
 	var parsed_script = parameters["parsed_script"]
 	
@@ -184,7 +184,7 @@ func do_execute_script(parameters: Dictionary):
 				
 				Rakugo.call_thread_safe("step")
 
-				semephore.wait()
+				semaphore.wait()
 				
 			"CHARACTER_DEF":
 				Rakugo.define_character(result.get_string("tag"), result.get_string("name"))
@@ -197,7 +197,7 @@ func do_execute_script(parameters: Dictionary):
 					Rakugo.replace_variables(result["default_answer"])
 				)
 
-				semephore.wait()
+				semaphore.wait()
 				
 			"MENU":
 				var menu_choices: PackedStringArray
@@ -217,7 +217,7 @@ func do_execute_script(parameters: Dictionary):
 				
 				Rakugo.call_thread_safe("menu", menu_choices)
 
-				semephore.wait()
+				semaphore.wait()
 				
 				if menu_jump_index < 0 or menu_jump_index >= menu_choices.size():
 					parameters["error"] = "Executer::do_execute_script::MENU, menu_jump_index out of range: " + str(menu_jump_index) + " >= " + str(menu_choices.size())
@@ -281,7 +281,7 @@ func do_execute_script(parameters: Dictionary):
 					# required because the thread crash (not godot) without error
 					# we only accept string and numbers when we parse
 					if value_type == TYPE_STRING and lvalue_type != TYPE_STRING:
-						parameters["error"] = "Executer::do_execute_script::SET_VARIABLE, Cannot resolve assignement: " + lvar_name + " of type(" + str(lvalue_type) + ") " + assignment + " with type(" + str(value_type) + ")"
+						parameters["error"] = "Executer::do_execute_script::SET_VARIABLE, Cannot resolve assignment: " + lvar_name + " of type(" + str(lvalue_type) + ") " + assignment + " with type(" + str(value_type) + ")"
 						parameters["stop"] = true
 						break
 					

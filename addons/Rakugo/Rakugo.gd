@@ -429,7 +429,7 @@ func is_waiting_menu_return():
 	return waiting_menu_return_value
 
 ## Use it when is_waiting_menu_return return true, to continue script reading process.
-## index is the index of choosed choice in the choices array given by sg_menu.
+## index is the index of chosen choice in the choices array given by sg_menu.
 func menu_return(index: int):
 	mutex.lock()
 	waiting_menu_return = false
