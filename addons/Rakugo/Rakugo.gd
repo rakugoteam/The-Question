@@ -51,9 +51,7 @@ func replace_variables(text: String) -> String:
 		var var_ = Rakugo.get_variable(sub_result.get_string("variable"))
 		
 		if var_:
-			if typeof(var_) != TYPE_STRING:
-				var_ = str(var_)
-
+			if typeof(var_) != TYPE_STRING: var_ = str(var_)
 			text = text.replace(sub_result.strings[0], var_)
 	
 	return text
@@ -73,12 +71,10 @@ func set_variable(var_name: String, value):
 			mutex.lock()
 			store_manager.variables[var_name] = value
 			mutex.unlock()
-
 			call_thread_safe("emit_sg_variable_changed", var_name, value)
 			return
 
-		2:
-			return set_character_variable(vars_[0], vars_[1], value)
+		2: return set_character_variable(vars_[0], vars_[1], value)
 		
 	push_error("Rakugo does not allow to store variables with more than 1 dot in name.")
 
@@ -91,19 +87,16 @@ func get_variable(var_name: String):
 	match vars_.size():
 		1:
 			var variable = null
-
 			mutex.lock()
 			if store_manager.variables.has(var_name):
 				variable = store_manager.variables.get(var_name)
 			mutex.unlock()
-			
 			if variable is String:
 				return replace_variables(variable)
 
 			return variable
 
-		2:
-			return get_character_variable(vars_[0], vars_[1])
+		2: return get_character_variable(vars_[0], vars_[1])
 
 	push_error("Rakugo does not knew a variable called: " + var_name)
 
@@ -118,18 +111,14 @@ func has_variable(var_name: String) -> bool:
 	match vars_.size():
 		1:
 			var has_variable = false
-
 			mutex.lock()
 			has_variable = store_manager.variables.has(var_name)
 			mutex.unlock()
-
 			return has_variable
 
-		2:
-			return character_has_variable(vars_[0], vars_[1])
+		2: return character_has_variable(vars_[0], vars_[1])
 
 	push_error("Rakugo does not knew a variable called: " + var_name)
-
 	return false
 
 #### Characters
@@ -141,19 +130,15 @@ func define_character(character_tag: String, character_name: String):
 
 func has_character(character_tag: String) -> bool:
 	var has_character = false
-
 	mutex.lock()
 	has_character = store_manager.characters.has(character_tag)
 	mutex.unlock()
-
 	return has_character
 
 func get_character(character_tag: String) -> Dictionary:
 	var character = {}
 
-	if character_tag.is_empty():
-		return character
-
+	if character_tag.is_empty(): return character
 	mutex.lock()
 	character = store_manager.characters.get(character_tag, {})
 
@@ -167,36 +152,36 @@ func get_narrator():
 	return get_character("narrator")
 
 ##Used to be call with call_thread_safe
-func emit_sg_character_variable_changed(character_tag: String, var_name: String, value):
+func emit_sg_character_variable_changed(
+	character_tag: String, var_name: String, value):
 	sg_character_variable_changed.emit(character_tag, var_name, value)
 
 func set_character_variable(character_tag: String, var_name: String, value):
 	var character = get_character(character_tag)
-
 	mutex.lock()
+
 	if !character.is_empty():
 		character[var_name] = value
-
 		call_thread_safe("emit_sg_character_variable_changed", character_tag, var_name, value)
+
 	mutex.unlock()
 
 func character_has_variable(character_tag: String, var_name: String) -> bool:
 	var character = get_character(character_tag)
-
 	var has_variable = false
-
 	mutex.lock()
+
 	if !character.is_empty():
 		has_variable = character.has(var_name)
+
 	mutex.unlock()
 	return has_variable
 
 func get_character_variable(character_tag: String, var_name: String):
 	var character = get_character(character_tag)
-
 	var character_variable = null
-
 	mutex.lock()
+
 	if !character.is_empty():
 		character_variable = character.get(var_name)
 
@@ -223,7 +208,6 @@ func _ready():
 	var version = ProjectSettings.get_setting(game_version)
 	var title = ProjectSettings.get_setting(game_title)
 	get_window().set_title("%s %s" % [title, version])
-
 	var narrator_name = ProjectSettings.get_setting(narrator_name)
 	define_character("narrator", narrator_name)
 
@@ -254,36 +238,31 @@ func resume_loaded_script() -> int:
 func parse_script(file_name: String) -> int:
 	mutex.lock()
 	var rk_lines = store_manager.load_rk(file_name)
-	
 	if rk_lines.is_empty():
 		mutex.unlock()
 		return FAILED
 	
 	var parsed_script = parser.parse_script(rk_lines)
-	
 	if parsed_script.is_empty():
 		mutex.unlock()
 		return FAILED
 		
 	parsed_script["path"] = file_name
-	
 	store_manager.parsed_scripts[file_name.get_file().get_basename()] = parsed_script
-	
 	mutex.unlock()
 	return OK
 
 ## Executer
 ## Execute a script previously registered with parse_script.
-func execute_script(script_name: String, label_name: String = "", index: int = 0) -> int:
+func execute_script(
+	script_name: String, label_name: String = "", index: int = 0) -> int:
 	var error = FAILED
-	
 	mutex.lock()
 	var parsed_script = store_manager.parsed_scripts.get(script_name, {})
 	
 	if parsed_script.is_empty():
 		push_error("Rakugo does not have parse a script named: " + script_name)
-	else:
-		error = executer.execute_script(parsed_script, label_name, index)
+	else: error = executer.execute_script(parsed_script, label_name, index)
 	mutex.unlock()
 	return error
 
@@ -294,12 +273,13 @@ func stop_last_script():
 	mutex.unlock()
 
 ## Do parse_script, if return OK then do execute_script.
-func parse_and_execute_script(file_name: String, label_name: String = "") -> int:
+func parse_and_execute_script(
+	file_name: String, label_name: String = "") -> int:
 	var error = FAILED
-	
 	mutex.lock()
 	if parse_script(file_name) == OK:
 		error = execute_script(file_name.get_file().get_basename(), label_name)
+
 	mutex.unlock()
 	return error
 
@@ -339,7 +319,6 @@ func step():
 	mutex.lock()
 	waiting_step = true
 	mutex.unlock()
-
 	call_thread_safe("emit_sg_step")
 
 ## Returns true when Rakugo waiting call of do_step.
@@ -353,7 +332,6 @@ func is_waiting_step():
 func do_step():
 	mutex.lock()
 	waiting_step = false
-
 	executer.current_semaphore.post()
 	mutex.unlock()
 
@@ -364,33 +342,31 @@ func emit_sg_say(character: Dictionary, text: String):
 ## Call from Executer when is read an instruction say
 func say(character_tag: String, text: String):
 	var character = get_character(character_tag)
-
 	call_thread_safe("emit_sg_say", character, text)
 
 ## Used to be call with call_thread_safe.
-func emit_sg_ask(character: Dictionary, question: String, default_answer: String):
+func emit_sg_ask(
+	character: Dictionary, question: String, default_answer: String):
 	sg_ask.emit(character, question, default_answer)
 
 ## Call from Executer when is read an instruction ask.
-func ask(variable_name: String, character_tag: String, question: String, default_answer: String):
+func ask(
+	variable_name: String, character_tag: String,
+	question: String, default_answer: String
+	):
 	mutex.lock()
 	waiting_ask_return = true
-
 	variable_ask_name = variable_name
 	mutex.unlock()
-	
 	var character = get_character(character_tag)
-	
 	call_thread_safe("emit_sg_ask", character, question, default_answer)
 
 ## Returns true when Rakugo waiting call of ask_return.
 func is_waiting_ask_return():
 	var waiting_ask_return_value = false
-
 	mutex.lock()
 	waiting_ask_return_value = waiting_ask_return
 	mutex.unlock()
-
 	return waiting_ask_return_value
 
 ## Use it when is_waiting_ask_return return true, to continue script reading process.
@@ -398,9 +374,7 @@ func ask_return(result):
 	mutex.lock()
 	waiting_ask_return = false
 	mutex.unlock()
-
 	set_variable(variable_ask_name, result)
-
 	mutex.lock()
 	executer.current_semaphore.post()
 	mutex.unlock()
@@ -415,17 +389,14 @@ func menu(choices: PackedStringArray):
 	mutex.lock()
 	waiting_menu_return = true
 	mutex.unlock()
-
 	call_thread_safe("emit_sg_menu", choices)
 
 ## Returns true when Rakugo waiting call of menu_return.
 func is_waiting_menu_return():
 	var waiting_menu_return_value = false
-
 	mutex.lock()
 	waiting_menu_return_value = waiting_menu_return
 	mutex.unlock()
-
 	return waiting_menu_return_value
 
 ## Use it when is_waiting_menu_return return true, to continue script reading process.
@@ -433,8 +404,6 @@ func is_waiting_menu_return():
 func menu_return(index: int):
 	mutex.lock()
 	waiting_menu_return = false
-	
 	executer.menu_jump_index = index
-
 	executer.current_semaphore.post()
 	mutex.unlock()
