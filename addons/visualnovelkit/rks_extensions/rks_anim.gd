@@ -28,7 +28,7 @@ func _on_custom_regex(key: String, result: RegExMatch):
 	
 	match key:
 		PlayAnim:
-			var node := rk_get_node(result.get_string(1))
+			var node := rk_get_node(result.get_string(1)) as AnimationPlayer
 			if !node: return
 
 			var anim_name := result.get_string(2)
@@ -41,13 +41,26 @@ func _on_custom_regex(key: String, result: RegExMatch):
 
 			if speed > 0: node.play(anim_name, speed)
 			elif speed < 0: node.play(anim_name, speed, true)
+			Rakugo.set_variable(node.name, "play:%s,%f" % [anim_name, speed])
+			node.animation_finished.connect(_on_animation_finished.bind(node))
+			node.animation_changed.connect( 
+				func (old_name: StringName, new_name: StringName):
+					Rakugo.set_variable(node.name, "play:%s,%f" % [new_name, speed])
+			)
 
 		PauseAnim:
-			var node := rk_get_node(result.get_string(1))
+			var node := rk_get_node(result.get_string(1)) as AnimationPlayer
 			if !node: return
 			node.pause()
+			var anim_name := node.current_animation
+			var anim_pose := node.current_animation_position
+			Rakugo.set_variable(node.name, "pause:%s,%f" % [anim_name, anim_pose])
 		
 		StopAnim:
-			var node := rk_get_node(result.get_string(1))
+			var node := rk_get_node(result.get_string(1)) as AnimationPlayer
 			if !node: return
 			node.stop()
+
+func _on_animation_finished(anim_name: StringName, node: AnimationPlayer):
+	var anim_end := node.current_animation_length
+	Rakugo.set_variable(node.name, "stop:%s,%f" % [anim_name, anim_end])
