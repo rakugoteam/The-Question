@@ -34,7 +34,8 @@ func _ready() -> void:
 		vbox_container.add_child(save_panel)
 		save_panel.init(save_file_name)
 		
-		save_panel.load_button.pressed.connect(_on_load_button_pressed.bind(save_file_name))
+		save_panel.load_button.pressed.connect(
+			_on_load_button_pressed.bind(save_file_name))
 		save_panel.delete_button.pressed.connect(
 			_on_delete_button_pressed.bind(save_panel, save_file_name))
 
@@ -56,15 +57,23 @@ func _on_confirmation_dialog_confirmed() -> void:
 		Modes.Loading:
 			# SaveHelper.save_file_name_to_load = current_save_file_name
 			# SceneLoader.change_scene(RGT_Globals.first_game_scene_setting)
-			SaveHelper.load(current_save_file_name)
+			var loaded := SaveHelper.load(current_save_file_name)
+			if loaded != OK:
+				push_error("broken save")
+				return
 			
+			Rakugo.last_thread_data = SaveHelper.last_loaded_data
+			Rakugo.parse_script(Rakugo.last_thread_data["path"])
+			Rakugo.sg_game_loaded.emit()
+
 		Modes.Deleting:
 			SaveHelper.delete(current_save_file_name)
 			
 			# move to trash the screenshot
 			OS.move_to_trash(
 				ProjectSettings.globalize_path(
-					SaveHelper.get_save_file_path_without_extension(current_save_file_name) + ".png"
+					SaveHelper.get_save_file_path_without_extension(
+						current_save_file_name) + ".png"
 				))
 				
 			SaveHelper.update_save_file_names()
@@ -75,4 +84,6 @@ func _on_confirmation_dialog_confirmed() -> void:
 			current_save_panel.queue_free()
 		
 		Modes.Saving:
-			SaveHelper.save(Rakugo.get_save_data())
+			Rakugo.mutex.lock()
+			SaveHelper.save(Rakugo.executer.get_current_thread_data())
+			Rakugo.mutex.unlock()
