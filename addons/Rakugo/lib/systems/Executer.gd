@@ -3,11 +3,8 @@ extends RefCounted
 const jump_error = "Executer::do_execute_jump, can not jump to unknown label : "
 
 var stop_thread := false
-
 var current_thread: Thread
-
 var current_semaphore: Semaphore
-
 var threads: Dictionary
 
 var regex := {
@@ -17,7 +14,6 @@ var regex := {
 }
 
 var regex_cache := {}
-
 var menu_jump_index: int
 
 func _init():
@@ -41,16 +37,13 @@ func get_current_thread_data() -> Dictionary:
 func stop_current_thread() -> int:
 	if current_thread and current_thread.is_alive():
 		var dict = threads[current_thread.get_id()]
-		
 		dict["stop"] = true
 		dict["semaphore"].post()
 	return OK
 
 func execute_script(parsed_script: Dictionary, label_name: String = "", index: int = 0) -> int:
 	stop_current_thread()
-
 	current_thread = Thread.new()
-
 	current_semaphore = Semaphore.new()
 	
 	var thread_parameters = {
@@ -68,11 +61,8 @@ func execute_script(parsed_script: Dictionary, label_name: String = "", index: i
 
 	if current_thread.start(Callable(self, "do_execute_script").bind(thread_parameters)) != OK:
 		threads.erase(current_thread.get_id())
-
 		current_thread = null
-		
 		current_semaphore = null
-		
 		return FAILED
 	return OK
 
@@ -86,34 +76,22 @@ func do_execute_script_end(parameters: Dictionary):
 		Rakugo.call_thread_safe("send_execute_script_finished", parameters["file_base_name"], parameters.get("error", ""))
 
 	threads.erase(current_thread.get_id())
-
 	current_thread = null
-		
 	current_semaphore = null
 
 func do_execute_jump(jump_label: String, labels: Dictionary) -> int:
-	if labels.has(jump_label):
-		return labels[jump_label]
-
+	if labels.has(jump_label): return labels[jump_label]
 	return -1
 
 func do_execute_script(parameters: Dictionary):
 	var thread = parameters["thread"]
-	
 	threads[thread.get_id()] = parameters
-	
 	var semaphore = parameters["semaphore"]
-	
 	var parsed_script = parameters["parsed_script"]
-	
 	Rakugo.call_thread_safe("send_execute_script_start", parameters["file_base_name"])
-	
 	var parse_array: Array = parsed_script["parse_array"]
-	
 	var labels = parsed_script["labels"]
-
 	var error = OK
-
 	var index := 0
 
 	if parameters.has("last_index"):
@@ -123,7 +101,6 @@ func do_execute_script(parameters: Dictionary):
 	
 		if parameters.has("label_name"):
 			var label = parameters["label_name"]
-
 			index = do_execute_jump(label, labels)
 		
 			if index == -1:
@@ -132,9 +109,7 @@ func do_execute_script(parameters: Dictionary):
 	
 	while !parameters["stop"] and index < parse_array.size():
 		parameters["last_index"] = index
-
 		var line: Array = parse_array[index]
-		
 		var result = line[1]
 		
 		match (line[0]):
@@ -179,11 +154,8 @@ func do_execute_script(parameters: Dictionary):
 			
 			"SAY":
 				var text = Rakugo.replace_variables(result["text"])
-
 				Rakugo.call_thread_safe("say", result["character_tag"], text)
-				
 				Rakugo.call_thread_safe("step")
-
 				semaphore.wait()
 				
 			"CHARACTER_DEF":
@@ -196,12 +168,10 @@ func do_execute_script(parameters: Dictionary):
 					Rakugo.replace_variables(result["question"]),
 					Rakugo.replace_variables(result["default_answer"])
 				)
-
 				semaphore.wait()
 				
 			"MENU":
 				var menu_choices: PackedStringArray
-				
 				var menu_jumps: Dictionary
 				
 				for i in line[2].size():
@@ -216,7 +186,6 @@ func do_execute_script(parameters: Dictionary):
 						menu_jumps[i] = label
 				
 				Rakugo.call_thread_safe("menu", menu_choices)
-
 				semaphore.wait()
 				
 				if menu_jump_index < 0 or menu_jump_index >= menu_choices.size():
@@ -226,7 +195,6 @@ func do_execute_script(parameters: Dictionary):
 				
 				if menu_jumps.has(menu_jump_index):
 					var jump_label = menu_jumps[menu_jump_index]
-
 					index = do_execute_jump(jump_label, labels)
 					
 					if index == -1:
@@ -240,7 +208,6 @@ func do_execute_script(parameters: Dictionary):
 			"SET_VARIABLE":
 				var rvar_name = result["rvar_name"]
 				var text = result["text"]
-				
 				var value = null
 				
 				if !rvar_name.is_empty():
@@ -257,14 +224,12 @@ func do_execute_script(parameters: Dictionary):
 					value = text
 				else:
 					value = result["number"]
-
 					if value.is_valid_int():
 						value = int(value)
 					else:
 						value = float(value)
 
 				var assignment = result["assignment"]
-				
 				var lvar_name = result["lvar_name"]
 				
 				if assignment != "=":
@@ -286,18 +251,10 @@ func do_execute_script(parameters: Dictionary):
 						break
 					
 					match (assignment):
-						"+=":
-							value = lvalue + value
-							
-						"-=":
-							value = lvalue - value
-							
-						"*=":
-							value = lvalue * value
-							
-						"/=":
-							value = lvalue / value
-						
+						"+=": value = lvalue + value
+						"-=": value = lvalue - value
+						"*=": value = lvalue * value
+						"/=": value = lvalue / value
 						_:
 							parameters["error"] = "Executer::do_execute_script::SET_VARIABLE, the assignment operator is not implemented :" + assignment
 							parameters["stop"] = true
