@@ -93,6 +93,8 @@ func _on_custom_regex(key: String, result: RegExMatch):
 					node.name, group_name, Show
 				]
 				try_call_method(node, Show, err)
+			
+			Rakugo.set_variable("/".join(nodes), "show")
 		
 		Hide:
 			var nodes := rk_get_nodes(result.get_string(1))
@@ -103,6 +105,8 @@ func _on_custom_regex(key: String, result: RegExMatch):
 					node.name, group_name, Hide
 				]
 				try_call_method(node, Hide, err)
+			
+			Rakugo.set_variable("/".join(nodes), "hide")
 		
 		AtPrecise:
 			var x := float(result.get_string(1))
@@ -111,9 +115,9 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			if result.get_string(4):
 				var z := float(result.get_string(4))
 				last_node.position = Vector3(x, y, z)
-				return
-			
-			last_node.position = Vector2(x, y)
+			else :last_node.position = Vector2(x, y)
+
+			Rakugo.set_variable(last_node.name, "pos:" + str(last_node.position))
 		
 		AtAxis:
 			var axis := result.get_string(1)
@@ -122,6 +126,7 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			last_node.position = calc_axis(
 				last_node.position, operator, axis, value
 			)
+			Rakugo.set_variable(last_node.name, "pos:" + str(last_node.position))
 		
 		AtPercent:
 			var procent := Vector2()
@@ -129,23 +134,24 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			procent.y = float(result.get_string(2)) / 100
 			var vp_size := get_viewport().get_visible_rect().size
 			last_node.position = procent * vp_size
+			Rakugo.set_variable(last_node.name, "pos:" + str(last_node.position))
 		
 		AtPredef:
 			var predef := result.get_string(1)
 			var procent: Vector2 = at_predefs[predef]
 			var vp_size := get_viewport().get_visible_rect().size
 			last_node.position = procent * vp_size
+			Rakugo.set_variable(last_node.name, "pos:" + str(last_node.position))
 
 		ScaleAll:
 			var scale := float(result.get_string(1))
 
 			if last_node.scale is Vector2:
 				last_node.scale = Vector2.ONE * scale
-				return
-
-			if last_node.scale is Vector3:
+			elif last_node.scale is Vector3:
 				last_node.scale = Vector3.ONE * scale
 			
+			Rakugo.set_variable(last_node.name, "scale:" + str(last_node.scale))
 			return
 
 		ScalePrecise:
@@ -155,10 +161,10 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			if result.get_string(4):
 				var z := float(result.get_string(4))
 				last_node.scale = Vector3(x, y, z)
-				return
+			else: last_node.scale = Vector2(x, y)
+
+			Rakugo.set_variable(last_node.name, "scale:" + str(last_node.scale))
 			
-			last_node.scale = Vector2(x, y)
-			return
 		
 		ScaleAxis:
 			var axis := result.get_string(1)
@@ -168,10 +174,14 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			last_node.scale = calc_axis(
 				last_node.scale, operator, axis, value
 			)
+
+			Rakugo.set_variable(last_node.name, "scale:" + str(last_node.scale))
+
 		
 		Rotate2D:
 			var angle := result.get_string(1)
 			last_node.rotation_degrees = float(angle)
+			Rakugo.set_variable(last_node.name, "angle:" + str(last_node.rotation))
 	
 		Rotate3D:
 			var angle := result.get_string(1)
@@ -179,6 +189,7 @@ func _on_custom_regex(key: String, result: RegExMatch):
 
 			var axis := str_to_axis(axis_str)
 			last_node.rotation = last_node.rotation.rotated(axis, float(angle))
+			Rakugo.set_variable(last_node.name, "angle:" + str(last_node.rotation))
 
 func calc_axis(vector, operator: String, axis: String, value: float):
 	if "x" in axis: vector.x = _axis(vector.x, operator, value)
