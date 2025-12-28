@@ -267,7 +267,6 @@ func do_execute_script(parameters: Dictionary):
 				
 				foo.call_deferred()
 		
-		Rakugo.set_variable("_dialogue", Rakugo.last_thread_data)
 		index += 1
 	
 	call_deferred("do_execute_script_end", parameters)
