@@ -9,7 +9,7 @@ const StopAudio := "stop audio"
 
 const regex := {
 	PlayAudio: "play +({NAME})( +{NUMERIC})?",
-	SeekAudio: "seek +({NAME})",
+	SeekAudio: "seek +({NAME})( +{NUMERIC})",
 	StopAudio: "stop +({NAME})",
 }
 
@@ -26,8 +26,13 @@ func _on_custom_regex(key: String, result: RegExMatch):
 		push_error(err_mess_01 % [key, group_name])
 		return
 	
-	var node := rk_get_node(result.get_string(1))
-	if !node: return
+	var node := rk_get_node(result.get_string(1)) # as AudioStreamPlayer
+	if node is AudioStreamPlayer: pass
+	elif node is AudioStreamPlayer2D: pass
+	elif node is AudioStreamPlayer3D: pass
+	else:
+		push_error("unsupported AudioStreamPlayer Node type") 
+		return
 
 	match key:
 		PlayAudio:
@@ -40,6 +45,14 @@ func _on_custom_regex(key: String, result: RegExMatch):
 				return
 
 			node.play(speed)
+			Rakugo.set_variable(node.name, "play:%f" % speed)
+			node.finished.connect( func(): Rakugo.set_variable(node.name, "stop"))
 
-		SeekAudio: node.seek()
-		StopAudio: node.stop()
+		SeekAudio:
+			var str_pos := result.get_string(2).strip_edges()
+			node.seek(float(str_pos))
+			Rakugo.set_variable(node.name, "seek:%s" % str_pos)
+
+		StopAudio:
+			node.stop()
+			Rakugo.set_variable(node.name, "stop")
