@@ -1,6 +1,7 @@
 extends ScrollContainer
 
-signal load_save
+## called when there is no save to load
+signal no_save_to_load
 
 const confirm_load = "Are you sure you want to load this save?\n"
 const confirm_delete = "Are you sure you want to delete this save ?\n"
@@ -69,7 +70,7 @@ func _on_confirmation_dialog_confirmed() -> void:
 			SaveHelper.update_save_file_names()
 			
 			if SaveHelper.save_file_names.is_empty():
-				load_save.emit()
+				no_save_to_load.emit()
 			
 			current_save_panel.queue_free()
 		
