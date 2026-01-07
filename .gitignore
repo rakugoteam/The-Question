@@ -20,3 +20,7 @@ mono_crash.*.json
 # Project specific ignores
 *.tmp
 addons/script-ide
+
+# AI generated docs
+.ai_gen/
+
