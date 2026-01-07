@@ -42,6 +42,9 @@ AdvancedText="*res://addons/advanced-text/AdvancedText.gd"
 HintPopup="*res://addons/advanced-text/HintPopup/hint_popup.tscn"
 IconsFonts="*res://addons/icons-fonts/icons_fonts/IconsFonts.gd"
 RKSShow="*res://addons/visualnovelkit/rks_extensions/rks_show.gd"
+GlobalMusic="*res://scenes/Music/GlobalMusic.tscn"
+RKSAudio="*res://addons/visualnovelkit/rks_extensions/rks_audio.gd"
+RKSAnim="*res://addons/visualnovelkit/rks_extensions/rks_anim.gd"
 
 [display]
 
@@ -61,6 +64,10 @@ script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "rk")
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/RakuScript_Color/plugin.cfg", "res://addons/Rakugo/plugin.cfg", "res://addons/advanced-text/plugin.cfg", "res://addons/icons-fonts/plugin.cfg", "res://addons/rakugo-nodes/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg", "res://addons/rakugo_regex_lab/plugin.cfg", "res://addons/visualnovelkit/plugin.cfg")
+
+[global_group]
+
+audio=""
 
 [gui]
 
