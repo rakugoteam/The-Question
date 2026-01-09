@@ -1,15 +1,17 @@
 [gd_scene load_steps=9 format=3 uid="uid://de5coe3ghvxle"]
 
-[ext_resource type="Texture2D" uid="uid://buqda41n1imfl" path="res://the_question-og/gui/images/sylvie blue giggle.png" id="1_yld8b"]
-[ext_resource type="Texture2D" uid="uid://dno5wm7mobwgf" path="res://the_question-og/gui/images/sylvie blue normal.png" id="2_buhsy"]
-[ext_resource type="Texture2D" uid="uid://cetd7dn85crp2" path="res://the_question-og/gui/images/sylvie blue smile.png" id="3_5p1fk"]
-[ext_resource type="Texture2D" uid="uid://d36sl7a2t6s24" path="res://the_question-og/gui/images/sylvie blue surprised.png" id="4_sr4an"]
-[ext_resource type="Texture2D" uid="uid://c7xnj12afq6sn" path="res://the_question-og/gui/images/sylvie green giggle.png" id="5_6222v"]
-[ext_resource type="Texture2D" uid="uid://b73u8wynke55y" path="res://the_question-og/gui/images/sylvie green normal.png" id="6_bvrtr"]
-[ext_resource type="Texture2D" uid="uid://q0cwiausgj67" path="res://the_question-og/gui/images/sylvie green smile.png" id="7_pf5qh"]
-[ext_resource type="Texture2D" uid="uid://dopilfdnfwvmm" path="res://the_question-og/gui/images/sylvie green surprised.png" id="8_efgj8"]
+[ext_resource type="Texture2D" uid="uid://buqda41n1imfl" path="res://the_question-og/images/sylvie blue giggle.png" id="1_yld8b"]
+[ext_resource type="Texture2D" uid="uid://dno5wm7mobwgf" path="res://the_question-og/images/sylvie blue normal.png" id="2_buhsy"]
+[ext_resource type="Texture2D" uid="uid://cetd7dn85crp2" path="res://the_question-og/images/sylvie blue smile.png" id="3_5p1fk"]
+[ext_resource type="Texture2D" uid="uid://d36sl7a2t6s24" path="res://the_question-og/images/sylvie blue surprised.png" id="4_sr4an"]
+[ext_resource type="Texture2D" uid="uid://c7xnj12afq6sn" path="res://the_question-og/images/sylvie green giggle.png" id="5_6222v"]
+[ext_resource type="Texture2D" uid="uid://b73u8wynke55y" path="res://the_question-og/images/sylvie green normal.png" id="6_bvrtr"]
+[ext_resource type="Texture2D" uid="uid://q0cwiausgj67" path="res://the_question-og/images/sylvie green smile.png" id="7_pf5qh"]
+[ext_resource type="Texture2D" uid="uid://dopilfdnfwvmm" path="res://the_question-og/images/sylvie green surprised.png" id="8_efgj8"]
 
-[node name="sylvie" type="Node2D" groups=["show"]]
+[node name="sylvie" type="Control" groups=["show"]]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="blue" type="Node2D" parent="."]
 
