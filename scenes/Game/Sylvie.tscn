@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://q0cwiausgj67" path="res://the_question-og/images/sylvie green smile.png" id="7_pf5qh"]
 [ext_resource type="Texture2D" uid="uid://dopilfdnfwvmm" path="res://the_question-og/images/sylvie green surprised.png" id="8_efgj8"]
 
-[node name="sylvie" type="Control" groups=["show"]]
+[node name="sylvie" type="Control" groups=["character", "show"]]
 layout_mode = 3
 anchors_preset = 0
 

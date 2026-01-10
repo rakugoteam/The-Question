@@ -68,6 +68,7 @@ enabled=PackedStringArray("res://addons/RakuScript_Color/plugin.cfg", "res://add
 [global_group]
 
 audio=""
+character=""
 
 [gui]
 
