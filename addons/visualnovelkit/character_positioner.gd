@@ -6,7 +6,7 @@ extends Control
 # Enable to print positioning diagnostics on updates.
 @export var debug_positioning := false
 
-@onready var sylvie: Control = $"../sylvie"
+@onready var character_root: Control = self
 
 var _last_sprite: Sprite2D
 
@@ -60,7 +60,7 @@ func _update_position(forced_sprite: Sprite2D = null) -> void:
 		return
 
 	_last_sprite = sprite
-	sylvie.set_anchors_preset(Control.PRESET_TOP_LEFT, false)
+	character_root.set_anchors_preset(Control.PRESET_TOP_LEFT, false)
 
 	match _positioning_mode:
 		PositioningMode.DEFAULT:
@@ -90,7 +90,7 @@ func _update_position(forced_sprite: Sprite2D = null) -> void:
 func _get_visible_sprite() -> Sprite2D:
 	# Choose the first visible sprite; fall back to the first found.
 	var fallback: Sprite2D = null
-	for group in sylvie.get_children():
+	for group in character_root.get_children():
 		if group is Node2D:
 			for child in group.get_children():
 				if child is Sprite2D:
@@ -113,10 +113,10 @@ func _get_sprite_rect(sprite: Sprite2D) -> Rect2:
 
 func _apply_offsets(target: Vector2) -> void:
 	# Treat the control as a point by keeping all offsets identical.
-	sylvie.offset_left = target.x
-	sylvie.offset_top = target.y
-	sylvie.offset_right = target.x
-	sylvie.offset_bottom = target.y
+	character_root.offset_left = target.x
+	character_root.offset_top = target.y
+	character_root.offset_right = target.x
+	character_root.offset_bottom = target.y
 
 func _get_predef_target(sprite_rect: Rect2, visible_rect: Rect2) -> Vector2:
 	# Map Ren'Py-style keywords to a target point.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://de5coe3ghvxle"]
+[gd_scene load_steps=10 format=3 uid="uid://de5coe3ghvxle"]
 
 [ext_resource type="Texture2D" uid="uid://buqda41n1imfl" path="res://the_question-og/images/sylvie blue giggle.png" id="1_yld8b"]
 [ext_resource type="Texture2D" uid="uid://dno5wm7mobwgf" path="res://the_question-og/images/sylvie blue normal.png" id="2_buhsy"]
@@ -8,10 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://b73u8wynke55y" path="res://the_question-og/images/sylvie green normal.png" id="6_bvrtr"]
 [ext_resource type="Texture2D" uid="uid://q0cwiausgj67" path="res://the_question-og/images/sylvie green smile.png" id="7_pf5qh"]
 [ext_resource type="Texture2D" uid="uid://dopilfdnfwvmm" path="res://the_question-og/images/sylvie green surprised.png" id="8_efgj8"]
+[ext_resource type="Script" uid="uid://bj30pmiauvvvs" path="res://addons/visualnovelkit/character_positioner.gd" id="9_2wnxm"]
 
 [node name="sylvie" type="Control" groups=["character", "show"]]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("9_2wnxm")
 
 [node name="blue" type="Node2D" parent="."]
 

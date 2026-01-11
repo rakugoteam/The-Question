@@ -85,6 +85,18 @@ func _ensure_character_positioner() -> void:
 	if character_positioner == null or !is_instance_valid(character_positioner):
 		_find_character_positioner()
 
+func _get_character_positioner(node: Node) -> Node:
+	if node != null and node.has_method("set_default_positioning"):
+		return node
+	if node != null:
+		var child := node.find_child("CharacterPositioner", true, false)
+		if child != null and child.has_method("set_default_positioning"):
+			return child
+	_ensure_character_positioner()
+	if character_positioner != null and character_positioner.has_method("set_default_positioning"):
+		return character_positioner
+	return null
+
 func _is_character(node: Node) -> bool:
 	return node != null and node.is_in_group(&"character")
 
@@ -104,10 +116,12 @@ func _apply_at_precise(x: float, y: float, z_str: String = "") -> void:
 		else:
 			last_node.position = Vector2(x, y)
 
-	if is_character and character_positioner != null and character_positioner.has_method("set_explicit_position"):
-		var vp_size := get_viewport().get_visible_rect().size
-		var percent_pos := Vector2(x / vp_size.x, y / vp_size.y)
-		character_positioner.set_explicit_position(percent_pos, false)
+	if is_character:
+		var positioner := _get_character_positioner(last_node)
+		if positioner != null and positioner.has_method("set_explicit_position"):
+			var vp_size := get_viewport().get_visible_rect().size
+			var percent_pos := Vector2(x / vp_size.x, y / vp_size.y)
+			positioner.set_explicit_position(percent_pos, false)
 
 func _apply_at_percent(percent: Vector2) -> void:
 	var normalized := _normalize_percent(percent)
@@ -115,15 +129,18 @@ func _apply_at_percent(percent: Vector2) -> void:
 		var vp_size := get_viewport().get_visible_rect().size
 		last_node.position = normalized * vp_size
 
-	if _is_character(last_node) and character_positioner != null and character_positioner.has_method("set_explicit_position"):
-		character_positioner.set_explicit_position(normalized, false)
+	if _is_character(last_node):
+		var positioner := _get_character_positioner(last_node)
+		if positioner != null and positioner.has_method("set_explicit_position"):
+			positioner.set_explicit_position(normalized, false)
 
 func _apply_at_predef(predef: String) -> void:
 	var key := predef.to_lower()
 	var is_character := _is_character(last_node)
 	if is_character and key == "reset":
-		if character_positioner != null and character_positioner.has_method("set_default_positioning"):
-			character_positioner.set_default_positioning()
+		var positioner := _get_character_positioner(last_node)
+		if positioner != null and positioner.has_method("set_default_positioning"):
+			positioner.set_default_positioning()
 		return
 
 	if not is_character:
@@ -134,11 +151,13 @@ func _apply_at_predef(predef: String) -> void:
 		var vp_size := get_viewport().get_visible_rect().size
 		last_node.position = procent * vp_size
 
-	if is_character and character_positioner != null and character_positioner.has_method("set_explicit_position"):
-		var procent := Vector2.ZERO
-		if key in at_predefs:
-			procent = _normalize_percent(at_predefs[key])
-		character_positioner.set_explicit_position(procent, true, key)
+	if is_character:
+		var positioner := _get_character_positioner(last_node)
+		if positioner != null and positioner.has_method("set_explicit_position"):
+			var procent := Vector2.ZERO
+			if key in at_predefs:
+				procent = _normalize_percent(at_predefs[key])
+			positioner.set_explicit_position(procent, true, key)
 
 func _parse_show_with_at(raw: String) -> Dictionary:
 	var tokens := raw.strip_edges().split(" ", false)
@@ -194,8 +213,10 @@ func _on_custom_regex(key: String, result: RegExMatch):
 
 			if at_tokens.is_empty():
 				# Reset to default positioning when showing a character without explicit position
-				if _is_character(last_node) and character_positioner != null and character_positioner.has_method("set_default_positioning"):
-					character_positioner.set_default_positioning()
+				if _is_character(last_node):
+					var positioner := _get_character_positioner(last_node)
+					if positioner != null and positioner.has_method("set_default_positioning"):
+						positioner.set_default_positioning()
 			else:
 				var at_key := at_tokens[0]
 				if at_key == "at":
