@@ -39,8 +39,6 @@ func _on_custom_regex(key: String, result: RegExMatch):
 				push_error("you try to play animation with 0 speed")
 				return
 
-			if speed > 0: node.play(anim_name, speed)
-			elif speed < 0: node.play(anim_name, speed, true)
 			Rakugo.set_variable(node.name, "play:%s,%f" % [anim_name, speed])
 			node.animation_finished.connect(_on_animation_finished.bind(node))
 			node.animation_changed.connect( 
@@ -48,13 +46,17 @@ func _on_custom_regex(key: String, result: RegExMatch):
 					Rakugo.set_variable(node.name, "play:%s,%f" % [new_name, speed])
 			)
 
+			if speed > 0: node.play(anim_name, speed)
+			elif speed < 0: node.play(anim_name, speed, true)
+
 		PauseAnim:
 			var node := rk_get_node(result.get_string(1)) as AnimationPlayer
 			if !node: return
-			node.pause()
+			
 			var anim_name := node.current_animation
 			var anim_pose := node.current_animation_position
 			Rakugo.set_variable(node.name, "pause:%s,%f" % [anim_name, anim_pose])
+			node.pause()
 		
 		StopAnim:
 			var node := rk_get_node(result.get_string(1)) as AnimationPlayer

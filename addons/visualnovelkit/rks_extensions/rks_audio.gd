@@ -44,14 +44,14 @@ func _on_custom_regex(key: String, result: RegExMatch):
 				push_error("you try to play audio with speed <= 0")
 				return
 
-			node.play(speed)
 			Rakugo.set_variable(node.name, "play:%f" % speed)
 			node.finished.connect( func(): Rakugo.set_variable(node.name, "stop"))
+			node.play(speed)
 
 		SeekAudio:
 			var str_pos := result.get_string(2).strip_edges()
-			node.seek(float(str_pos))
 			Rakugo.set_variable(node.name, "seek:%s" % str_pos)
+			node.seek(float(str_pos))
 
 		StopAudio:
 			node.stop()
