@@ -26,6 +26,7 @@ signal positioning_mode_changed(mode: PositioningMode)
 
 func _ready():
 	# React to viewport changes so the character stays aligned at any resolution.
+	_log_viewport("ready")
 	get_viewport().size_changed.connect(_on_viewport_resized)
 	_update_position()
 
@@ -36,6 +37,7 @@ func _process(_delta: float) -> void:
 		_update_position(sprite)
 
 func _on_viewport_resized() -> void:
+	_log_viewport("size_changed")
 	_update_position()
 
 # Public methods to control positioning mode.
@@ -66,6 +68,7 @@ func _update_position(forced_sprite: Sprite2D = null) -> void:
 		PositioningMode.DEFAULT:
 			# Apply default center-bottom positioning
 			var visible_rect := get_viewport().get_visible_rect()
+			_log_viewport("update_default")
 			var sprite_rect := _get_sprite_rect(sprite)
 			var target := _align_to(Vector2(0.5, 1.0), sprite_rect, visible_rect)
 			_apply_offsets(target)
@@ -73,6 +76,7 @@ func _update_position(forced_sprite: Sprite2D = null) -> void:
 		PositioningMode.EXPLICIT_PREDEF:
 			# Use explicit predefined position (Ren'Py-style)
 			var visible_rect := get_viewport().get_visible_rect()
+			_log_viewport("update_predef")
 			var sprite_rect := _get_sprite_rect(sprite)
 			var target: Vector2 = _get_predef_target(sprite_rect, visible_rect)
 			_apply_offsets(target)
@@ -80,6 +84,7 @@ func _update_position(forced_sprite: Sprite2D = null) -> void:
 		PositioningMode.EXPLICIT_CUSTOM:
 			# Explicit positions are stored as percent-of-viewport coordinates.
 			var visible_rect := get_viewport().get_visible_rect()
+			_log_viewport("update_custom")
 			var target_x := visible_rect.position.x + _explicit_position.x * visible_rect.size.x
 			var target_y := visible_rect.position.y + _explicit_position.y * visible_rect.size.y
 			_apply_offsets(Vector2(target_x, target_y))
@@ -197,3 +202,14 @@ func _get_global_rect(sprite: Sprite2D, rect: Rect2) -> Rect2:
 	var max_x: float = max(p1.x, p2.x, p3.x, p4.x)
 	var max_y: float = max(p1.y, p2.y, p3.y, p4.y)
 	return Rect2(Vector2(min_x, min_y), Vector2(max_x - min_x, max_y - min_y))
+
+func _log_viewport(tag: String) -> void:
+	if debug_positioning:
+		var vp := get_viewport()
+		prints(
+			"[ViewportDebug][CharacterPositioner]",
+			tag,
+			"viewport_size=", vp.size,
+			"visible_rect=", vp.get_visible_rect(),
+			"window_size=", get_window().size
+		)

@@ -2,6 +2,12 @@ extends RKSExtension
 
 var vnk = VisualNovelKit
 
+# Handles Rakugo `show`/`hide` plus inline transforms. Supports:
+# - `show <path>` + subsequent `at/scale/rotate`
+# - `show <path> at ...` inline transforms
+# Characters (nodes in the `character` group) delegate positioning to a
+# CharacterPositioner attached to the character.
+
 const Show := "show"
 const Hide := "hide"
 const AtPrecise = "at precise"
@@ -64,43 +70,30 @@ var at_predefs := {
 }
 
 var last_node: Node
-var character_positioner: Node = null
 
 func _group_name() -> StringName:
 	return Show
 
 func _ready():
+	# Register regex patterns and initialize helpers.
 	for key in regex: Rakugo.add_custom_regex(key, regex[key])
 	super._ready()
-	_find_character_positioner()
-
-func _find_character_positioner() -> void:
-	# Find the CharacterPositioner node in the scene tree
-	var root := get_tree().get_root()
-	var found := root.find_child("CharacterPositioner", true, false)
-	if found != null:
-		character_positioner = found
-
-func _ensure_character_positioner() -> void:
-	if character_positioner == null or !is_instance_valid(character_positioner):
-		_find_character_positioner()
 
 func _get_character_positioner(node: Node) -> Node:
+	# Prefer a positioner attached to the character; no global fallback.
 	if node != null and node.has_method("set_default_positioning"):
 		return node
 	if node != null:
 		var child := node.find_child("CharacterPositioner", true, false)
 		if child != null and child.has_method("set_default_positioning"):
 			return child
-	_ensure_character_positioner()
-	if character_positioner != null and character_positioner.has_method("set_default_positioning"):
-		return character_positioner
 	return null
 
 func _is_character(node: Node) -> bool:
 	return node != null and node.is_in_group(&"character")
 
 func _normalize_percent(percent: Vector2) -> Vector2:
+	# Accept 0..1 or 0..100 inputs.
 	var x := percent.x
 	var y := percent.y
 	if x > 1.0: x /= 100.0
@@ -108,42 +101,40 @@ func _normalize_percent(percent: Vector2) -> Vector2:
 	return Vector2(x, y)
 
 func _apply_at_precise(x: float, y: float, z_str: String = "") -> void:
-	var is_character := _is_character(last_node)
-	if not is_character:
+	# Absolute coordinates. Characters store a normalized position for resizes.
+	var positioner := _get_character_positioner(last_node)
+	if positioner == null:
 		if z_str != "":
 			var z := float(z_str)
 			last_node.position = Vector3(x, y, z)
 		else:
 			last_node.position = Vector2(x, y)
 
-	if is_character:
-		var positioner := _get_character_positioner(last_node)
-		if positioner != null and positioner.has_method("set_explicit_position"):
-			var vp_size := get_viewport().get_visible_rect().size
-			var percent_pos := Vector2(x / vp_size.x, y / vp_size.y)
-			positioner.set_explicit_position(percent_pos, false)
+	if positioner != null and positioner.has_method("set_explicit_position"):
+		var vp_size := get_viewport().get_visible_rect().size
+		var percent_pos := Vector2(x / vp_size.x, y / vp_size.y)
+		positioner.set_explicit_position(percent_pos, false)
 
 func _apply_at_percent(percent: Vector2) -> void:
+	# Percent-based coordinates.
 	var normalized := _normalize_percent(percent)
-	if not _is_character(last_node):
+	var positioner := _get_character_positioner(last_node)
+	if positioner == null:
 		var vp_size := get_viewport().get_visible_rect().size
 		last_node.position = normalized * vp_size
 
-	if _is_character(last_node):
-		var positioner := _get_character_positioner(last_node)
-		if positioner != null and positioner.has_method("set_explicit_position"):
-			positioner.set_explicit_position(normalized, false)
+	if positioner != null and positioner.has_method("set_explicit_position"):
+		positioner.set_explicit_position(normalized, false)
 
 func _apply_at_predef(predef: String) -> void:
+	# Ren'Py-style predefined positions for characters.
 	var key := predef.to_lower()
-	var is_character := _is_character(last_node)
-	if is_character and key == "reset":
-		var positioner := _get_character_positioner(last_node)
-		if positioner != null and positioner.has_method("set_default_positioning"):
-			positioner.set_default_positioning()
+	var positioner := _get_character_positioner(last_node)
+	if positioner != null and key == "reset":
+		positioner.set_default_positioning()
 		return
 
-	if not is_character:
+	if positioner == null:
 		if key not in at_predefs:
 			push_error("predef %s isn't supported" % key)
 			return
@@ -151,15 +142,14 @@ func _apply_at_predef(predef: String) -> void:
 		var vp_size := get_viewport().get_visible_rect().size
 		last_node.position = procent * vp_size
 
-	if is_character:
-		var positioner := _get_character_positioner(last_node)
-		if positioner != null and positioner.has_method("set_explicit_position"):
-			var procent := Vector2.ZERO
-			if key in at_predefs:
-				procent = _normalize_percent(at_predefs[key])
-			positioner.set_explicit_position(procent, true, key)
+	if positioner != null and positioner.has_method("set_explicit_position"):
+		var procent := Vector2.ZERO
+		if key in at_predefs:
+			procent = _normalize_percent(at_predefs[key])
+		positioner.set_explicit_position(procent, true, key)
 
 func _parse_show_with_at(raw: String) -> Dictionary:
+	# Split inline `show ... at ...` into path and transform tokens.
 	var tokens := raw.strip_edges().split(" ", false)
 	var show_tokens: PackedStringArray = tokens
 	var at_tokens := PackedStringArray()
@@ -178,6 +168,7 @@ func _parse_show_with_at(raw: String) -> Dictionary:
 	}
 
 func _on_custom_regex(key: String, result: RegExMatch):
+	# Central dispatcher for show/transform commands.
 	if key not in regex: return
 	var err_key := key
 	if " " in err_key: err_key = err_key.split(" ", false)[0]
@@ -190,10 +181,9 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			push_error(err_mess_04 % [err_key, Show])
 			return
 
-	_ensure_character_positioner()
-
 	match key:
 		Show:
+			# Show a node path, optionally with an inline transform.
 			var parsed := _parse_show_with_at(result.get_string(1))
 			var show_tokens: PackedStringArray = parsed.get("show_tokens", PackedStringArray())
 			var at_tokens: PackedStringArray = parsed.get("at_tokens", PackedStringArray())
@@ -212,12 +202,12 @@ func _on_custom_regex(key: String, result: RegExMatch):
 				try_call_method(node, Show, err)
 
 			if at_tokens.is_empty():
-				# Reset to default positioning when showing a character without explicit position
-				if _is_character(last_node):
-					var positioner := _get_character_positioner(last_node)
-					if positioner != null and positioner.has_method("set_default_positioning"):
-						positioner.set_default_positioning()
+				# Reset to default positioning when showing a character with a positioner.
+				var positioner := _get_character_positioner(last_node)
+				if positioner != null and positioner.has_method("set_default_positioning"):
+					positioner.set_default_positioning()
 			else:
+				# Inline `at` parsing.
 				var at_key := at_tokens[0]
 				if at_key == "at":
 					if at_tokens.size() == 2:
@@ -234,6 +224,7 @@ func _on_custom_regex(key: String, result: RegExMatch):
 						_apply_at_percent(Vector2(float(at_tokens[1]), float(at_tokens[2])))
 		
 		Hide:
+			# Hide a node path.
 			var nodes := rk_get_nodes(result.get_string(1))
 			if !nodes: return
 			
@@ -244,6 +235,7 @@ func _on_custom_regex(key: String, result: RegExMatch):
 				try_call_method(node, Hide, err)
 		
 		AtPrecise:
+			# `at x y [z]` (or inline variant).
 			var x := float(result.get_string(1))
 			var y := float(result.get_string(2))
 			var z_str := result.get_string(4)
@@ -251,6 +243,7 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			return
 		
 		AtAxis:
+			# `at x+= 20`, `at xy= 50`, etc.
 			var axis := result.get_string(1)
 			var operator := result.get_string(2)
 			var value := float(result.get_string(3))
@@ -259,16 +252,19 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			)
 		
 		AtPercent:
+			# `at% x y` (or `at percent x y` inline).
 			var procent := Vector2()
 			procent.x = float(result.get_string(1)) / 100
 			procent.y = float(result.get_string(2)) / 100
 			_apply_at_percent(procent)
 		
 		AtPredef:
+			# `at left`, `at truecenter`, etc.
 			var predef := result.get_string(1)
 			_apply_at_predef(predef)
 
 		ScaleAll:
+			# Uniform scale.
 			var scale := float(result.get_string(1))
 
 			if last_node.scale is Vector2:
@@ -281,6 +277,7 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			return
 
 		ScalePrecise:
+			# Non-uniform scale.
 			var x := float(result.get_string(1))
 			var y := float(result.get_string(2))
 	
@@ -293,6 +290,7 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			return
 		
 		ScaleAxis:
+			# Axis-only scaling.
 			var axis := result.get_string(1)
 			var operator := result.get_string(2)
 			var value := float(result.get_string(3))
@@ -302,10 +300,12 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			)
 		
 		Rotate2D:
+			# 2D rotation in degrees.
 			var angle := result.get_string(1)
 			last_node.rotation_degrees = float(angle)
 	
 		Rotate3D:
+			# 3D rotation around a named axis.
 			var angle := result.get_string(1)
 			var axis_str := result.get_string(2)
 

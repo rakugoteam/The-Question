@@ -21,7 +21,5 @@ mono_crash.*.json
 *.tmp
 addons/script-ide
 
-# AI generated docs
-.ai_gen/
-AGENTS.md
-plans/
+# User files
+.user/
