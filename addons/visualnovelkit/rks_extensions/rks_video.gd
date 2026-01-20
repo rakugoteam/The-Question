@@ -29,14 +29,14 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			var node := rk_get_node(result.get_string(1)) as VideoStreamPlayer
 			if !node: return
 			node.finished.connect(_on_video_finished.bind(node))
-			Rakugo.set_variable(node.name, "play:%s" % [true])
+			# Rakugo.set_variable(node.name, "play:%s" % [true])
 			node.play()
 		
 		StopVideo:
 			var node := rk_get_node(result.get_string(1)) as VideoStreamPlayer
 			if !node: return
-			Rakugo.set_variable(node.name, "stop:%s" % [true])
+			# Rakugo.set_variable(node.name, "stop:%s" % [true])
 			node.stop()
 
 func _on_video_finished(node: VideoStreamPlayer):
-	Rakugo.set_variable(node.name, "stop:%s" % [true])
+	# Rakugo.set_variable(node.name, "stop:%s" % [true])
