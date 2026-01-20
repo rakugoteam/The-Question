@@ -5,20 +5,48 @@
 [ext_resource type="Texture2D" uid="uid://ckp58fioirv00" path="res://the_question-og/images/bg meadow.jpg" id="3_hy25q"]
 [ext_resource type="Texture2D" uid="uid://dj5n5pn75ar61" path="res://the_question-og/images/bg uni.jpg" id="4_xqli7"]
 
-[node name="bg" type="Node2D" groups=["show"]]
+[node name="bg" type="Control" groups=["show"]]
+layout_mode = 3
 
-[node name="club" type="Sprite2D" parent="."]
+[node name="club" type="TextureRect" parent="."]
 texture = ExtResource("1_afcop")
-centered = false
+expand_mode = 1
+stretch_mode = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="lecturehall" type="Sprite2D" parent="."]
+[node name="lecturehall" type="TextureRect" parent="."]
 texture = ExtResource("2_yu0b1")
-centered = false
+expand_mode = 1
+stretch_mode = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
 
-[node name="meadow" type="Sprite2D" parent="."]
+[node name="meadow" type="TextureRect" parent="."]
 texture = ExtResource("3_hy25q")
-centered = false
+expand_mode = 1
+stretch_mode = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
 
-[node name="uni" type="Sprite2D" parent="."]
+[node name="uni" type="TextureRect" parent="."]
 texture = ExtResource("4_xqli7")
-centered = false
+expand_mode = 1
+stretch_mode = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false

@@ -15,6 +15,8 @@ start:
 	hide sylvie
 	show bg lecturehall
 
+	play bgm
+
 	"It's only when I hear the sounds of shuffling feet and supplies being put away that I realize that the lecture's over."
 
 	"Professor Eileen's lectures are usually interesting, but today I just couldn't concentrate on it."
@@ -144,6 +146,8 @@ marry:
 
 	"And so, we become a visual novel creating duo."
 
+	hide black
+
 	show bg club
 
 	"Over the years, we make lots of games and have a lot of fun making them."
@@ -217,6 +221,8 @@ marry_2:
 
 	"**Good Ending**."
 
+	stop bgm
+
 	exit
 
 later:
@@ -232,5 +238,7 @@ later:
 	"I guess I'll never know the answer to my question now..."
 
 	"**Bad Ending**."
+
+	stop bgm
 
 	exit

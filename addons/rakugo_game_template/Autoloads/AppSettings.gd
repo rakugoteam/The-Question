@@ -58,7 +58,14 @@ func _ready():
 		if config_file.has_section_key(VIDEO_SECTION, SCREEN_RESOLUTION):
 			var res_value = config_file.get_value(VIDEO_SECTION, SCREEN_RESOLUTION)
 			
-			main_window.content_scale_size = res_value
+			# Commented out below in order to keep all the UI and 2D content scaling with the window 
+			# size/resolution. If main_window.content_scale_size is set and the configured 
+			# resolution isn't the same resolution as we have authored for (ie 1280x720), then
+			# we will have various elements on-screen that do not cover the same proportion of the
+			# screen anymore (for example, the character sprite appears smaller if config has a
+			# window size of 1920x1080.
+			
+			#main_window.content_scale_size = res_value
 			
 			if main_window.mode != Window.MODE_EXCLUSIVE_FULLSCREEN:
 				main_window.size = res_value
@@ -110,7 +117,14 @@ func set_fullscreen(value:bool):
 func set_resolution(value : Vector2i) -> void:
 	var main_window = get_window()
 	
-	main_window.content_scale_size = value
+	# Commented out below in order to keep all the UI and 2D content scaling with the window 
+	# size/resolution. If main_window.content_scale_size is set and the configured 
+	# resolution isn't the same resolution as we have authored for (ie 1280x720), then
+	# we will have various elements on-screen that do not cover the same proportion of the
+	# screen anymore (for example, the character sprite appears smaller if config has a
+	# window size of 1920x1080.
+
+	#main_window.content_scale_size = value
 	
 	if main_window.mode != Window.MODE_EXCLUSIVE_FULLSCREEN:
 		main_window.size = value

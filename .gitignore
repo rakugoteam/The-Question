@@ -20,3 +20,6 @@ mono_crash.*.json
 # Project specific ignores
 *.tmp
 addons/script-ide
+
+# User files
+.user/

@@ -35,7 +35,7 @@ func _ready():
 		for resolution in resolutions_array:
 			resolution_options.add_item(str(resolution.x) + " x " + str(resolution.y))
 			
-		var current_resolution = main_window.content_scale_size
+		var current_resolution = main_window.size
 		
 		tmp_resolution = current_resolution
 		
@@ -61,7 +61,7 @@ func _on_apply_button_pressed() -> void:
 	var index = resolution_options.selected
 	
 	if index != -1:
-		tmp_resolution = main_window.content_scale_size
+		tmp_resolution = main_window.size
 		
 		AppSettings.set_resolution(resolutions_array[index])
 	
@@ -78,7 +78,7 @@ func reset_resolution_and_scale() -> void:
 	
 	AppSettings.set_resolution(tmp_resolution)
 	
-	var index = resolutions_array.find(main_window.content_scale_size)
+	var index = resolutions_array.find(main_window.size)
 		
 	if index != -1:
 		resolution_options.select(index)
@@ -97,7 +97,7 @@ func _on_confirmation_dialog_confirmed() -> void:
 	
 	var main_window = get_window()
 	
-	tmp_resolution = main_window.content_scale_size
+	tmp_resolution = main_window.size
 	
 	tmp_gui_scale = main_window.content_scale_factor
 

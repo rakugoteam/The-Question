@@ -13,7 +13,7 @@ config_version=5
 config/name="The Question"
 config/version="1.0.0"
 run/main_scene="res://scenes/Bootstrap/bootstrap.tscn"
-config/features=PackedStringArray("4.4")
+config/features=PackedStringArray("4.5")
 config/icon="res://icon.svg"
 addons/rakugo_game_template/loading_scene_path="res://scenes/LoadingScreen/LoadingScreen.tscn"
 addons/rakugo_game_template/main_menu_path="res://scenes/MainMenu/MainMenu.tscn"
@@ -42,13 +42,19 @@ AdvancedText="*res://addons/advanced-text/AdvancedText.gd"
 HintPopup="*res://addons/advanced-text/HintPopup/hint_popup.tscn"
 IconsFonts="*res://addons/icons-fonts/icons_fonts/IconsFonts.gd"
 RKSShow="*res://addons/visualnovelkit/rks_extensions/rks_show.gd"
+GlobalMusic="*res://scenes/Music/GlobalMusic.tscn"
+RKSAudio="*res://addons/visualnovelkit/rks_extensions/rks_audio.gd"
+RKSAnim="*res://addons/visualnovelkit/rks_extensions/rks_anim.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/resizable=false
 window/stretch/mode="canvas_items"
+
+[docks]
+
+filesystem/textfile_extensions="txt,md,cfg,ini,log,json,yml,yaml,toml,xml,rk"
 
 [editor]
 
@@ -56,7 +62,12 @@ script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "rk")
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/RakuScript_Color/plugin.cfg", "res://addons/Rakugo/plugin.cfg", "res://addons/advanced-text/plugin.cfg", "res://addons/icons-fonts/plugin.cfg", "res://addons/rakugo-nodes/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg", "res://addons/visualnovelkit/plugin.cfg")
+enabled=PackedStringArray("res://addons/RakuScript_Color/plugin.cfg", "res://addons/Rakugo/plugin.cfg", "res://addons/advanced-text/plugin.cfg", "res://addons/icons-fonts/plugin.cfg", "res://addons/rakugo-nodes/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg", "res://addons/rakugo_regex_lab/plugin.cfg", "res://addons/visualnovelkit/plugin.cfg")
+
+[global_group]
+
+audio=""
+character=""
 
 [gui]
 

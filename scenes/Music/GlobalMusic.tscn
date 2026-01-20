@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://rribxhgdq6o5"]
+
+[ext_resource type="AudioStream" uid="uid://drn5k4vcxa0q2" path="res://the_question-og/illurock.mp3" id="1_ey3tg"]
+
+[node name="GlobalMusic" type="Node"]
+
+[node name="bgm" type="AudioStreamPlayer" parent="." groups=["audio"]]
+stream = ExtResource("1_ey3tg")
+bus = &"Music"
