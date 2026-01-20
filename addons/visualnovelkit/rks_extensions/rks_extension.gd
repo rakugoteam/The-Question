@@ -34,7 +34,13 @@ func rk_get_nodes(rk_node_path: String) -> Array[Node]:
 	var node := root_node
 	var nodes: Array[Node] = [root_node]
 	for element in path_elements:
+		if node == null:
+			push_error(err_mess_02 % [element, group_name])
+			return []
 		var n := node.get_node(element)
+		if n == null:
+			push_error(err_mess_02 % [element, group_name])
+			return []
 		nodes.append(n)
 		node = n
 

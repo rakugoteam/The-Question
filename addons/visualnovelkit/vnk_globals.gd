@@ -9,6 +9,8 @@ const default_markup = "res://addons/visualnovelkit/default_markups/def_markdown
 const rks_extesion_dir := "res://addons/visualnovelkit/rks_extensions"
 const rks_extesions := {
 	RKSShow = rks_extesion_dir + "/rks_show.gd",
+	RKSAudio = rks_extesion_dir + "/rks_audio.gd",
+	RKSAnim = rks_extesion_dir + "/rks_anim.gd",
 }
 
 const at_setting_path = setting_path + "/at_predefind/"

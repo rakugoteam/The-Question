@@ -1,0 +1,69 @@
+# Test script for character positioning
+character s "Sylvie"
+s.color = "#c8ffc8"
+
+jump test_start
+
+test_start:
+    "Testing character positioning system..."
+
+    # Test 1: Default positioning (should be center-bottom)
+    show sylvie green normal
+    "1. Default positioning - should be center-bottom"
+    
+    # Test 2: Left positioning
+    show sylvie green normal at left
+    "2. Left positioning - should be bottom-left"
+    
+    # Test 3: Right positioning
+    show sylvie green smile at right
+    "3. Right positioning - should be bottom-right"
+    
+    # Test 4: Center positioning
+    show sylvie green normal at center
+    "4. Center positioning - should be center-bottom"
+    
+    # Test 5: Top positioning
+    show sylvie green smile at top
+    "5. Top positioning - should be center-top"
+    
+    # Test 6: Top-left positioning
+    show sylvie green normal at top_left
+    "6. Top-left positioning"
+    
+    # Test 7: Top-right positioning
+    show sylvie green smile at top_right
+    "7. Top-right positioning"
+    
+    # Test 8: Bottom positioning (should be same as default)
+    show sylvie green normal at bottom
+    "8. Bottom positioning - should be center-bottom"
+    
+    # Test 9: Bottom-left positioning
+    show sylvie green smile at bottom_left
+    "9. Bottom-left positioning"
+    
+    # Test 10: Bottom-right positioning
+    show sylvie green normal at bottom_right
+    "10. Bottom-right positioning"
+    
+    # Test 11: Custom coordinates
+    show sylvie green smile at 500 800
+    "11. Custom coordinates - should be at 500,800"
+    
+    # Test 12: Percentage positioning
+    show sylvie green normal at percent 50 50
+    "12. Percentage positioning - should be center"
+    
+    # Test 13: Back to default
+    show sylvie green smile
+    "13. Back to default positioning"
+    
+    # Test 14: Hide and show again (should reset to default)
+    hide sylvie
+
+    show sylvie green normal
+    "14. After hide/show - should be default center-bottom"
+ 
+    "Positioning test complete!"
+    exit
