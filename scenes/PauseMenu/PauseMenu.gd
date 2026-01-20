@@ -75,7 +75,7 @@ func _on_save_button_pressed() -> void:
 	accept_dialog.popup_centered()
 	ask_to_save.emit()
 
-func save_this_please(data: Dictionary):
+func save_data(data: Dictionary):
 	if SaveHelper.save(data) == OK:
 		accept_dialog.hide()
 		hide()

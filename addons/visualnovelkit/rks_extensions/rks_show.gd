@@ -50,7 +50,6 @@ var at_predefs := {
 	# center
 	"center": vnk.at_center,
 	"default": vnk.at_center,
-	"truecenter": Vector2(0.5, 0.5),
 	"left": Vector2(vnk.at_left, vnk.at_center.y),
 	"right": Vector2(vnk.at_right, vnk.at_center.y),
 
@@ -200,28 +199,8 @@ func _on_custom_regex(key: String, result: RegExMatch):
 					node.name, group_name, Show
 				]
 				try_call_method(node, Show, err)
-
-			if at_tokens.is_empty():
-				# Reset to default positioning when showing a character with a positioner.
-				var positioner := _get_character_positioner(last_node)
-				if positioner != null and positioner.has_method("set_default_positioning"):
-					positioner.set_default_positioning()
-			else:
-				# Inline `at` parsing.
-				var at_key := at_tokens[0]
-				if at_key == "at":
-					if at_tokens.size() == 2:
-						_apply_at_predef(at_tokens[1])
-					elif at_tokens.size() >= 4 and at_tokens[1].to_lower() == "percent" and at_tokens[2].is_valid_float() and at_tokens[3].is_valid_float():
-						_apply_at_percent(Vector2(float(at_tokens[2]), float(at_tokens[3])))
-					elif at_tokens.size() >= 3 and at_tokens[1].is_valid_float() and at_tokens[2].is_valid_float():
-						var z_str := ""
-						if at_tokens.size() >= 4 and at_tokens[3].is_valid_float():
-							z_str = at_tokens[3]
-						_apply_at_precise(float(at_tokens[1]), float(at_tokens[2]), z_str)
-				elif at_key == "at%":
-					if at_tokens.size() >= 3 and at_tokens[1].is_valid_float() and at_tokens[2].is_valid_float():
-						_apply_at_percent(Vector2(float(at_tokens[1]), float(at_tokens[2])))
+			
+			# Rakugo.set_variable("/".join(nodes), "show")
 		
 		Hide:
 			# Hide a node path.
@@ -233,6 +212,8 @@ func _on_custom_regex(key: String, result: RegExMatch):
 					node.name, group_name, Hide
 				]
 				try_call_method(node, Hide, err)
+			
+			# Rakugo.set_variable("/".join(nodes), "hide")
 		
 		AtPrecise:
 			# `at x y [z]` (or inline variant).
@@ -250,6 +231,7 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			last_node.position = calc_axis(
 				last_node.position, operator, axis, value
 			)
+			# Rakugo.set_variable(last_node.name, "pos:" + str(last_node.position))
 		
 		AtPercent:
 			# `at% x y` (or `at percent x y` inline).
@@ -259,7 +241,7 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			_apply_at_percent(procent)
 		
 		AtPredef:
-			# `at left`, `at truecenter`, etc.
+			# `at left`, `at true center`, etc.
 			var predef := result.get_string(1)
 			_apply_at_predef(predef)
 
@@ -269,11 +251,10 @@ func _on_custom_regex(key: String, result: RegExMatch):
 
 			if last_node.scale is Vector2:
 				last_node.scale = Vector2.ONE * scale
-				return
-
-			if last_node.scale is Vector3:
+			elif last_node.scale is Vector3:
 				last_node.scale = Vector3.ONE * scale
 			
+			# Rakugo.set_variable(last_node.name, "scale:" + str(last_node.scale))
 			return
 
 		ScalePrecise:
@@ -284,10 +265,10 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			if result.get_string(4):
 				var z := float(result.get_string(4))
 				last_node.scale = Vector3(x, y, z)
-				return
+			else: last_node.scale = Vector2(x, y)
+
+			# Rakugo.set_variable(last_node.name, "scale:" + str(last_node.scale))
 			
-			last_node.scale = Vector2(x, y)
-			return
 		
 		ScaleAxis:
 			# Axis-only scaling.
@@ -298,11 +279,15 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			last_node.scale = calc_axis(
 				last_node.scale, operator, axis, value
 			)
+
+			# Rakugo.set_variable(last_node.name, "scale:" + str(last_node.scale))
+
 		
 		Rotate2D:
 			# 2D rotation in degrees.
 			var angle := result.get_string(1)
 			last_node.rotation_degrees = float(angle)
+			# Rakugo.set_variable(last_node.name, "angle:" + str(last_node.rotation))
 	
 		Rotate3D:
 			# 3D rotation around a named axis.
@@ -311,6 +296,7 @@ func _on_custom_regex(key: String, result: RegExMatch):
 
 			var axis := str_to_axis(axis_str)
 			last_node.rotation = last_node.rotation.rotated(axis, float(angle))
+			# Rakugo.set_variable(last_node.name, "angle:" + str(last_node.rotation))
 
 func calc_axis(vector, operator: String, axis: String, value: float):
 	if "x" in axis: vector.x = _axis(vector.x, operator, value)
