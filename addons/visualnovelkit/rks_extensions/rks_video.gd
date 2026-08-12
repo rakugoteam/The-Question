@@ -40,3 +40,4 @@ func _on_custom_regex(key: String, result: RegExMatch):
 
 func _on_video_finished(node: VideoStreamPlayer):
 	# Rakugo.set_variable(node.name, "stop:%s" % [true])
+	pass
