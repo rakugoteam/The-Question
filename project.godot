@@ -8,12 +8,16 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="The Question"
 config/version="1.0.0"
 run/main_scene="res://scenes/Bootstrap/bootstrap.tscn"
-config/features=PackedStringArray("4.5")
+config/features=PackedStringArray("4.7")
 config/icon="res://icon.svg"
 addons/rakugo_game_template/loading_scene_path="res://scenes/LoadingScreen/LoadingScreen.tscn"
 addons/rakugo_game_template/main_menu_path="res://scenes/MainMenu/MainMenu.tscn"
@@ -32,19 +36,19 @@ addons/visual_novel_kit/at_predefind/bottom=75.0
 
 [autoload]
 
-AppSettings="*res://addons/rakugo_game_template/Autoloads/AppSettings.gd"
-SceneLoader="*res://addons/rakugo_game_template/Autoloads/SceneLoader.gd"
-ProjectMusicController="*res://addons/rakugo_game_template/Autoloads/ProjectMusicController.tscn"
-UISoundManager="*res://addons/rakugo_game_template/Autoloads/UISoundManager/UISoundManager.tscn"
-Transitions="*res://addons/rakugo_game_template/Autoloads/Transitions/transitions.tscn"
-Rakugo="*res://addons/Rakugo/Rakugo.gd"
-AdvancedText="*res://addons/advanced-text/AdvancedText.gd"
-HintPopup="*res://addons/advanced-text/HintPopup/hint_popup.tscn"
-IconsFonts="*res://addons/icons-fonts/icons_fonts/IconsFonts.gd"
-RKSShow="*res://addons/visualnovelkit/rks_extensions/rks_show.gd"
+AppSettings="*uid://c8x01bc0wfdl3"
+SceneLoader="*uid://bsvqdo0dqh0ao"
+ProjectMusicController="*uid://r5t485lr3p7t"
+UISoundManager="*uid://cc37235kj4384"
+Transitions="*uid://b0w163uxufsvm"
+Rakugo="*uid://n8ftqei0e84h"
+AdvancedText="*uid://drvqrd43l3dgv"
+HintPopup="*uid://d1qw62h10t5vw"
+IconsFonts="*uid://b5tsg0jpnhhhf"
+RKSShow="*uid://ctkpjrdmlyr00"
 GlobalMusic="*res://scenes/Music/GlobalMusic.tscn"
-RKSAudio="*res://addons/visualnovelkit/rks_extensions/rks_audio.gd"
-RKSAnim="*res://addons/visualnovelkit/rks_extensions/rks_anim.gd"
+RKSAudio="*uid://rpk02hoac8ko"
+RKSAnim="*uid://b4k8033g1ohjf"
 
 [display]
 

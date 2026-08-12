@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://bubl284qwoqf8"]
+[gd_resource type="Theme" format=3 uid="uid://bubl284qwoqf8"]
 
 [ext_resource type="Texture2D" uid="uid://cpau7jxw8bo3e" path="res://the_question-og/gui/button/hover_background.png" id="1_vis5i"]
 [ext_resource type="Texture2D" uid="uid://bodh84elgiyku" path="res://the_question-og/gui/slider/vertical_hover_thumb.png" id="2_ewl7h"]

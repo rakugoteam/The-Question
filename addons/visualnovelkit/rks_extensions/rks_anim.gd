@@ -44,6 +44,7 @@ func _on_custom_regex(key: String, result: RegExMatch):
 			node.animation_changed.connect( 
 				func (old_name: StringName, new_name: StringName):
 					# Rakugo.set_variable(node.name, "play:%s,%f" % [new_name, speed])
+					pass
 			)
 
 			if speed > 0: node.play(anim_name, speed)
